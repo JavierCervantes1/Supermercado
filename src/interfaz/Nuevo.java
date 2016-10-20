@@ -5,17 +5,43 @@
  */
 package interfaz;
 
+import clases.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ButtonModel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author user
  */
-public class Nuevo extends javax.swing.JFrame {
+public class Nuevo extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Nuevo
-     */
-    public Nuevo() {
-        initComponents();
+    String ruta;
+    ObjectOutputStream salida;
+    ArrayList<Producto> productos;
+    Producto p;
+
+    public Nuevo(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        try {
+            initComponents();
+            ruta = "src/datos/productos.txt";
+            productos = Helper.traerDatos(ruta);
+            salida = new ObjectOutputStream(new FileOutputStream(ruta));
+            Helper.volcado(salida, productos);
+            Helper.limpiarTabla(tblProductos);
+            Helper.llenadoTabla(tblProductos, ruta);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
     }
 
     /**
@@ -27,59 +53,38 @@ public class Nuevo extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        RadioBtGenero = new javax.swing.ButtonGroup();
+        GRbGenero = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cmbTipo = new javax.swing.JComboBox<>();
         txtGarantia = new javax.swing.JTextField();
-        txtNombrePd = new javax.swing.JTextField();
+        txtNombreProducto = new javax.swing.JTextField();
         txtUnidades = new javax.swing.JTextField();
-        txtPrecion1 = new javax.swing.JTextField();
+        txtPrecio = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        CheckConsumo = new javax.swing.JCheckBox();
+        CheckNegocio = new javax.swing.JCheckBox();
         jPanel3 = new javax.swing.JPanel();
         RbUnisex = new javax.swing.JRadioButton();
         RbMasculino = new javax.swing.JRadioButton();
         RbFemenino = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         txtMarca = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductos = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        cmdLimpiar = new javax.swing.JButton();
+        cmdGuardar = new javax.swing.JButton();
+        cmdEliminar = new javax.swing.JButton();
+        cmdSalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("LOTE");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Producto", "Tipo", "Marca", "Unidades", "Garantía", "Género", "Clasificación", "Precio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tblProductosMouseClicked(evt);
-            }
-        });
-        jScrollPane1.setViewportView(tblProductos);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 620, 160));
 
         jLabel1.setText("Tipo");
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 80, 20));
@@ -93,21 +98,21 @@ public class Nuevo extends javax.swing.JFrame {
         jLabel4.setText("Marca");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 50, 20));
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Comestible", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Utencilios" }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios", " " }));
         jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 120, -1));
         jPanel1.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 120, -1));
-        jPanel1.add(txtNombrePd, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
+        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
         jPanel1.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 120, -1));
-        jPanel1.add(txtPrecion1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 120, -1));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 120, -1));
 
         jLabel6.setText("Precio");
         jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 110, 20));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Clasificación"));
 
-        jCheckBox1.setText("De consumo");
+        CheckConsumo.setText("De consumo");
 
-        jCheckBox2.setText("De Negocio");
+        CheckNegocio.setText("De Negocio");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -115,17 +120,17 @@ public class Nuevo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jCheckBox1)
+                .addComponent(CheckConsumo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jCheckBox2)
-                .addGap(99, 99, 99))
+                .addComponent(CheckNegocio)
+                .addGap(725, 725, 725))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2))
+                    .addComponent(CheckConsumo)
+                    .addComponent(CheckNegocio))
                 .addGap(0, 14, Short.MAX_VALUE))
         );
 
@@ -133,13 +138,13 @@ public class Nuevo extends javax.swing.JFrame {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Género"));
 
-        RadioBtGenero.add(RbUnisex);
+        GRbGenero.add(RbUnisex);
         RbUnisex.setText("Unisex");
 
-        RadioBtGenero.add(RbMasculino);
+        GRbGenero.add(RbMasculino);
         RbMasculino.setText("Masculino");
 
-        RadioBtGenero.add(RbFemenino);
+        GRbGenero.add(RbFemenino);
         RbFemenino.setText("Femenino");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -171,33 +176,195 @@ public class Nuevo extends javax.swing.JFrame {
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 110, 20));
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 120, -1));
 
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No.", "Producto", "Tipo", "Marca", "Unidades", "Garantía", "Género", "Clasificación", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tblProductos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblProductosMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(tblProductos);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 310, 740, 150));
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 30, 80, -1));
+
+        cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGuardarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 80, -1));
+
+        cmdEliminar.setText("Eliminar");
+        cmdEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminarActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 80, -1));
+
+        cmdSalir.setText("Salir");
+        cmdSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSalirActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 80, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 560, 71));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-        /*Persona p;
-        int i;
-        personas = Helper.traerDatos(ruta);
-        i = tblPersonas.getSelectedRow();
-        p = personas.get(i);
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
 
-        txtCedula.setText(p.getCedula());
-        txtNombre.setText(p.getNombre());
-        txtApellido.setText(p.getApellido());*/
+        try {
+            String Nombre, Tipo, Marca, Garantia, Genero = "", Clasificacion = "";
+            double Precio;
+            int Unidades;
+
+            Nombre = txtNombreProducto.getText();
+            Marca = txtMarca.getText();
+            Garantia = txtGarantia.getText();
+            Tipo = (String) cmbTipo.getSelectedItem();
+            Unidades = Integer.parseInt(txtUnidades.getText());
+            Precio = Double.parseDouble(txtPrecio.getText());
+
+            if (RbUnisex.isSelected()) {
+                Genero = RbUnisex.getLabel();
+            }
+            if (RbMasculino.isSelected()) {
+                Genero = RbMasculino.getLabel();
+            }
+            if (RbFemenino.isSelected()) {
+                Genero = RbFemenino.getLabel();
+            }
+
+            if (CheckConsumo.isSelected()) {
+                Clasificacion = CheckConsumo.getLabel();
+            }
+            if (CheckNegocio.isSelected()) {
+                Clasificacion = CheckNegocio.getLabel();
+            }
+            if (CheckConsumo.isSelected() && CheckNegocio.isSelected()) {
+                Clasificacion = CheckConsumo.getLabel() + " y " + CheckNegocio.getLabel();
+            }
+
+            Producto p = new Producto(Nombre, Tipo, Marca, Garantia, Genero, Clasificacion, Unidades, Precio);
+
+            p.guardar(salida);
+            Helper.llenadoTabla(tblProductos, ruta);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+    }//GEN-LAST:event_cmdGuardarActionPerformed
+
+    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
+        int i;
+
+        productos = Helper.traerDatos(ruta);
+        i = tblProductos.getSelectedRow();
+        p = productos.get(i);
+
+        txtNombreProducto.setText(p.getNombre());
+        txtGarantia.setText(p.getGarantia());
+        txtMarca.setText(p.getMarca());
+        txtPrecio.setText(String.valueOf(p.getPrecio()));
+        txtUnidades.setText(String.valueOf(p.getUnidades()));
+        cmbTipo.setSelectedItem(p.getTipo());
+
+        GRbGenero.clearSelection();
+        CheckConsumo.setSelected(false);
+        CheckNegocio.setSelected(false);
+
+
     }//GEN-LAST:event_tblProductosMouseClicked
+
+    private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
+        int i, op;
+
+        op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar este Producto?", "Eliminar", JOptionPane.YES_NO_OPTION);
+
+        if (op == JOptionPane.YES_OPTION) {
+
+            try {
+                i = tblProductos.getSelectedRow();
+                productos.remove(i);
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                Helper.volcado(salida, productos);
+                Helper.llenadoTabla(tblProductos, ruta);
+                txtNombreProducto.setText("");
+                txtPrecio.setText("");
+                txtMarca.setText("");
+                txtGarantia.setText("");
+                txtUnidades.setText("");
+                cmbTipo.setSelectedIndex(0);
+                txtNombreProducto.requestFocusInWindow();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(Nuevo.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(Nuevo.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cmdEliminarActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        txtNombreProducto.setText("");
+        txtPrecio.setText("");
+        txtMarca.setText("");
+        txtGarantia.setText("");
+        txtUnidades.setText("");
+        cmbTipo.setSelectedIndex(0);
+        GRbGenero.clearSelection();
+        CheckConsumo.setSelected(false);
+        CheckNegocio.setSelected(false);
+        txtNombreProducto.requestFocusInWindow();
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_cmdSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,23 +392,35 @@ public class Nuevo extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Nuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Nuevo().setVisible(true);
+                Nuevo dialog = new Nuevo(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    public static javax.swing.ButtonGroup RadioBtGenero;
+    private javax.swing.JCheckBox CheckConsumo;
+    private javax.swing.JCheckBox CheckNegocio;
+    private javax.swing.ButtonGroup GRbGenero;
     private javax.swing.JRadioButton RbFemenino;
     private javax.swing.JRadioButton RbMasculino;
     private javax.swing.JRadioButton RbUnisex;
     private javax.swing.JComboBox<String> cmbTipo;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JButton cmdEliminar;
+    private javax.swing.JButton cmdGuardar;
+    private javax.swing.JButton cmdLimpiar;
+    private javax.swing.JButton cmdSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -251,12 +430,13 @@ public class Nuevo extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductos;
     private javax.swing.JTextField txtGarantia;
     private javax.swing.JTextField txtMarca;
-    private javax.swing.JTextField txtNombrePd;
-    private javax.swing.JTextField txtPrecion1;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables
 }

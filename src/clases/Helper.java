@@ -6,6 +6,7 @@
 package clases;
 
 //import interfaz.Agregar;
+import interfaz.Nuevo;
 import java.awt.Component;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -83,91 +84,6 @@ public class Helper {
 
     }
 
-    public static int cantidadNumerosPares(JTable tabla) {
-        int nf, nc, aux, cont = 0;
-        nf = tabla.getRowCount();
-        nc = tabla.getColumnCount();
-        for (int i = 0; i < nf; i++) {
-            for (int j = 0; j < nc; j++) {
-
-                aux = (int) tabla.getValueAt(i, j);
-                if (aux % 2 == 0) {
-                    cont++;
-                }
-
-            }
-
-        }
-
-        return cont;
-    }
-
-    public static void numerosPares(JTable tabla1, JTable tabla2) {
-        int nf, nc, aux;
-        nf = tabla1.getRowCount();
-        nc = tabla1.getColumnCount();
-        for (int i = 0; i < nf; i++) {
-            for (int j = 0; j < nc; j++) {
-
-                aux = (int) tabla1.getValueAt(i, j);
-                if (aux % 2 == 0) {
-                    tabla2.setValueAt(aux, i, j);
-                }
-            }
-        }
-    }
-
-    public static void diagonalPrincipal(JTable tabla1, JTable tabla2) {
-        int nf, nc, aux;
-        nf = tabla1.getRowCount();
-        nc = tabla1.getColumnCount();
-        for (int i = 0; i < nf; i++) {
-            for (int j = 0; j < nc; j++) {
-
-                aux = (int) tabla1.getValueAt(i, j);
-                if (i == j) {
-                    tabla2.setValueAt(aux, i, j);
-                }
-            }
-        }
-    }
-
-    public static void letraC(JTable tabla1, JTable tabla2) {
-        int nf, nc, aux;
-        nf = tabla1.getRowCount();
-        nc = tabla1.getColumnCount();
-        for (int i = 0; i < nf; i++) {
-            for (int j = 0; j < nc; j++) {
-
-                aux = (int) tabla1.getValueAt(i, j);
-                if (i == 0 || j == 0 || i == nf - 1) {
-                    tabla2.setValueAt(aux, i, j);
-                }
-
-            }
-
-        }
-
-    }
-
-    public static void letraH(JTable tabla1, JTable tabla2) {
-        int nf, nc, aux;
-        nf = tabla1.getRowCount();
-        nc = tabla1.getColumnCount();
-        for (int i = 0; i < nf; i++) {
-            for (int j = 0; j < nc; j++) {
-
-                aux = (int) tabla1.getValueAt(i, j);
-                if (j == 0 || j == nc - 1 || i == (nf - 1) / 2) {
-                    tabla2.setValueAt(aux, i, j);
-                }
-
-            }
-
-        }
-    }
-
-  
     public static int[][] pasarDatosMatriz(JTable tabla1) {
         int nf, nc;
         nf = tabla1.getRowCount();
@@ -182,125 +98,26 @@ public class Helper {
         }
         return m;
     }
-
-    public static String recorridoHaciaArriba(int m[][], int j) {
-        String aux = "";
-        int nf = m.length;
-        for (int i = (nf - 1); i >= 0; i--) {
-            aux = aux + m[i][j] + ", ";
-        }
-        return aux;
-    }
-     public static String recorridoHaciaArriba(int m[][], int j, int in,int fin) {
-        String aux = "";
-        for (int i = in; i >= fin; i--) {
-            aux = aux + m[i][j] + ", ";
-        }
-        return aux;
-    }
-
-    public static String recorridoHaciaAbajo(int m[][], int j) {
-        String aux = "";
-        int nf = m.length;
-        for (int i = 0; i < nf; i++) {
-            aux = aux + m[i][j] + ", ";
-        }
-        return aux;
-    }
-    
-    public static String recorridoHaciaAbajo(int m[][], int j,int in, int fin) {
-        String aux = "";
-        for (int i = in; i < fin; i++) {
-            aux = aux + m[i][j] + ", ";
-        }
-        return aux;
-    }
-    
-    public static String recorridoUno(JTable tabla1){
-        int m[][] = pasarDatosMatriz(tabla1);
-        int nc = m[0].length;
-        String aux="";
-        
-        for (int j = 0; j < nc; j++) {
-            if(j%2 == 0){
-             aux=aux+ recorridoHaciaArriba(m, j);
-            }else{
-              aux=aux+  recorridoHaciaAbajo(m, j);
-            }
-            
-        }
-       aux=aux.substring(0, aux.length()-2);
-        return aux;
-    }
-    
-    public static String recorridoHaciaIzquierda(int[][] m, int i){
-        String aux ="";
-        int nc = m[0].length;
-        
-        for (int j = (nc-1); j >= 0; j--) {
-            aux=aux + m[i][j]+", ";
-        }
-        return aux;
-    }
-    public static String recorridoHaciaIzquierda(int[][] m, int i, int in, int fin){
-        String aux ="";
-        
-        
-        for (int j = in; j >= fin; j--) {
-            aux=aux + m[i][j]+", ";
-        }
-        return aux;
-    }
-    
-    public static String recorridoHaciaDerecha(int[][] m, int i){
-        String aux ="";
-        int nc = m[0].length;
-        
-        for (int j =0; j < nc; j++) {
-            aux=aux + m[i][j]+", ";
-        }
-        return aux;
-    }
-    public static String recorridoHaciaDerecha(int[][] m, int i, int in, int fin){
-        String aux ="";
-        
-        
-        for (int j =in; j < fin; j++) {
-            aux=aux + m[i][j]+", ";
-        }
-        return aux;
-    }
-    
-    public static String recorridoDos(JTable tabla1){
-        int[][] m= pasarDatosMatriz(tabla1);
-        int nf=m.length;
-        String aux ="";
-        for (int i = 0; i <nf; i++) {
-            if(i%2==0){
-                aux=aux+ Helper.recorridoHaciaIzquierda(m, i);
-            }else{
-                aux=aux+Helper.recorridoHaciaDerecha(m, i);
-            }
-                
-        }
-        aux=aux.substring(0, aux.length()-2);
-        return aux;
-    }
     
     public static void llenadoTabla(JTable tabla, String ruta){
         int nf;
         DefaultTableModel tm;
-        ArrayList<Persona> personas = traerDatos(ruta);
+        ArrayList<Producto> productos = traerDatos(ruta);
         tm = (DefaultTableModel)tabla.getModel();
-        nf = personas.size();
+        nf = productos.size();
         tm.setRowCount(nf);
         limpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
            tm.setValueAt(i+1, i, 0);
-           tm.setValueAt(personas.get(i).getCedula(), i, 1);
-           tm.setValueAt(personas.get(i).getNombre(), i, 2);
-           tm.setValueAt(personas.get(i).getApellido(), i, 3);
-            
+           tm.setValueAt(productos.get(i).getNombre(), i, 1);
+           tm.setValueAt(productos.get(i).getTipo(), i, 2);
+           tm.setValueAt(productos.get(i).getMarca(), i, 3);
+           tm.setValueAt(productos.get(i).getUnidades(), i, 4);
+           tm.setValueAt(productos.get(i).getGarantia(), i, 5);
+           tm.setValueAt(productos.get(i).getGenero(), i, 6);
+           tm.setValueAt(productos.get(i).getClasificacion(), i, 7);
+           tm.setValueAt(productos.get(i).getPrecio(), i, 8);
+           
         }
         
     }
@@ -308,13 +125,13 @@ public class Helper {
     public static ArrayList traerDatos(String ruta){
         FileInputStream archivo;
             ObjectInputStream entrada;
-            ArrayList personas = new ArrayList();
+            ArrayList productos = new ArrayList();
             Object p;
         try {
             archivo = new FileInputStream(ruta);
             entrada = new ObjectInputStream(archivo);
             while((p=entrada.readObject())!=null){
-                personas.add(p);
+                productos.add(p);
             }
             
         } catch (FileNotFoundException ex) {
@@ -325,15 +142,15 @@ public class Helper {
             Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-       return personas;
+       return productos;
 
     }
-    public static void volcado(ObjectOutputStream salida, ArrayList personas){
-        for (int i = 0; i < personas.size(); i++) {
+    public static void volcado(ObjectOutputStream salida, ArrayList productos){
+        for (int i = 0; i < productos.size(); i++) {
             try {
-                salida.writeObject(personas.get(i));
+                salida.writeObject(productos.get(i));
             } catch (IOException ex) {
-                //Logger.getLogger(Agregar.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Nuevo.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
