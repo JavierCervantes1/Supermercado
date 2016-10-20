@@ -83,6 +83,7 @@ public class Nuevo extends javax.swing.JDialog {
         cmdSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("LOTE");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -98,7 +99,7 @@ public class Nuevo extends javax.swing.JDialog {
         jLabel4.setText("Marca");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 50, 20));
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios", " " }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios" }));
         jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 120, -1));
         jPanel1.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 120, -1));
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));

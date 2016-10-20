@@ -7,6 +7,7 @@
   </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
+    <Property name="title" type="java.lang.String" value="LOTE"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -92,7 +93,7 @@
         <Component class="javax.swing.JComboBox" name="cmbTipo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="13">
+              <StringArray count="12">
                 <StringItem index="0" value="Accesorio"/>
                 <StringItem index="1" value="Aseo Personal"/>
                 <StringItem index="2" value="Belleza"/>
@@ -105,7 +106,6 @@
                 <StringItem index="9" value="Ropa"/>
                 <StringItem index="10" value="Tecnologia"/>
                 <StringItem index="11" value="Utencilios"/>
-                <StringItem index="12" value=" "/>
               </StringArray>
             </Property>
           </Properties>
@@ -367,6 +367,9 @@
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdGuardarActionPerformed"/>
               </Events>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_SerializeTo" type="java.lang.String" value="Nuevo_cmdGuardar"/>
+              </AuxValues>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="20" y="30" width="80" height="-1"/>
