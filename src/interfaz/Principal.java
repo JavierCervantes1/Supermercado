@@ -31,25 +31,25 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        MnNuevoProducto = new javax.swing.JMenuItem();
+        mnNuevoProducto = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        MnSalir = new javax.swing.JMenuItem();
+        mnSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        MnCompra = new javax.swing.JMenuItem();
+        mnVenta = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MnClientes = new javax.swing.JMenuItem();
-        MnFacturas = new javax.swing.JMenuItem();
-        MnMercancia = new javax.swing.JMenuItem();
+        mnFacturas = new javax.swing.JMenuItem();
+        mnMercancia = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("TIENDA");
+        setTitle("Centro Comercial - Bienvenidos");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/portada1.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 260));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 260));
 
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setForeground(new java.awt.Color(255, 0, 0));
@@ -57,46 +57,56 @@ public class Principal extends javax.swing.JFrame {
         jMenuBar1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
         jMenu1.setText("Sistema");
+        jMenu1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
-        MnNuevoProducto.setText("Registrar Producto");
-        MnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+        mnNuevoProducto.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnNuevoProducto.setText("Registrar Producto");
+        mnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnNuevoProductoActionPerformed(evt);
+                mnNuevoProductoActionPerformed(evt);
             }
         });
-        jMenu1.add(MnNuevoProducto);
+        jMenu1.add(mnNuevoProducto);
 
+        jMenuItem6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         jMenuItem6.setText("Registrar Cliente");
         jMenu1.add(jMenuItem6);
         jMenu1.add(jSeparator1);
 
-        MnSalir.setText("Salir");
-        MnSalir.addActionListener(new java.awt.event.ActionListener() {
+        mnSalir.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnSalir.setText("Salir");
+        mnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                MnSalirActionPerformed(evt);
+                mnSalirActionPerformed(evt);
             }
         });
-        jMenu1.add(MnSalir);
+        jMenu1.add(mnSalir);
 
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Pedidos");
+        jMenu3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
-        MnCompra.setText("Agregar Venta");
-        jMenu3.add(MnCompra);
+        mnVenta.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnVenta.setText("Agregar Venta");
+        jMenu3.add(mnVenta);
 
         jMenuBar1.add(jMenu3);
 
         jMenu2.setText("Reportes");
+        jMenu2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
+        MnClientes.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         MnClientes.setText("Clientes");
         jMenu2.add(MnClientes);
 
-        MnFacturas.setText("Facturas");
-        jMenu2.add(MnFacturas);
+        mnFacturas.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnFacturas.setText("Facturas");
+        jMenu2.add(mnFacturas);
 
-        MnMercancia.setText("Mercancia");
-        jMenu2.add(MnMercancia);
+        mnMercancia.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnMercancia.setText("Mercancia");
+        jMenu2.add(mnMercancia);
 
         jMenuBar1.add(jMenu2);
 
@@ -106,14 +116,14 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void MnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnNuevoProductoActionPerformed
+    private void mnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoProductoActionPerformed
         Nuevo n = new Nuevo(this,true);
             n.setVisible(true);
-    }//GEN-LAST:event_MnNuevoProductoActionPerformed
+    }//GEN-LAST:event_mnNuevoProductoActionPerformed
 
-    private void MnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSalirActionPerformed
+    private void mnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSalirActionPerformed
         System.exit(0);
-    }//GEN-LAST:event_MnSalirActionPerformed
+    }//GEN-LAST:event_mnSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,11 +162,6 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem MnClientes;
-    private javax.swing.JMenuItem MnCompra;
-    private javax.swing.JMenuItem MnFacturas;
-    private javax.swing.JMenuItem MnMercancia;
-    private javax.swing.JMenuItem MnNuevoProducto;
-    private javax.swing.JMenuItem MnSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
@@ -165,5 +170,10 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem mnFacturas;
+    private javax.swing.JMenuItem mnMercancia;
+    private javax.swing.JMenuItem mnNuevoProducto;
+    private javax.swing.JMenuItem mnSalir;
+    private javax.swing.JMenuItem mnVenta;
     // End of variables declaration//GEN-END:variables
 }
