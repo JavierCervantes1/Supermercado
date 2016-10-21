@@ -6,6 +6,7 @@
 package interfaz;
 
 import clases.*;
+import java.awt.Dialog;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -224,6 +225,7 @@ public class Nuevo extends javax.swing.JDialog {
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         int i;
+        String genero;
 
         productos = Helper.traerDatos(ruta);
         i = tblProductos.getSelectedRow();
@@ -236,9 +238,17 @@ public class Nuevo extends javax.swing.JDialog {
         txtUnidades.setText(String.valueOf(p.getUnidades()));
         cmbTipo.setSelectedItem(p.getTipo());
 
+        genero = p.getGenero();
+        
         GRbGenero.clearSelection();
         CheckConsumo.setSelected(false);
         CheckNegocio.setSelected(false);
+        
+        if(genero.equalsIgnoreCase("Masculino")){
+            RbMasculino.setSelected(true);
+        }
+        
+        
 
     }//GEN-LAST:event_tblProductosMouseClicked
 
@@ -327,7 +337,7 @@ public class Nuevo extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
-        System.exit(0);
+         setVisible(false);
     }//GEN-LAST:event_cmdSalirActionPerformed
 
     /**
