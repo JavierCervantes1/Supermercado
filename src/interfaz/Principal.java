@@ -37,7 +37,6 @@ public class Principal extends javax.swing.JFrame {
         MnSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         MnCompra = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         MnClientes = new javax.swing.JMenuItem();
         MnFacturas = new javax.swing.JMenuItem();
@@ -85,9 +84,6 @@ public class Principal extends javax.swing.JFrame {
 
         MnCompra.setText("Agregar Venta");
         jMenu3.add(MnCompra);
-
-        jMenuItem7.setText("jMenuItem7");
-        jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
 
@@ -168,7 +164,6 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }

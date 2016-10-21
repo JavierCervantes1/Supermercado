@@ -60,7 +60,6 @@ public class Nuevo extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         cmbTipo = new javax.swing.JComboBox<>();
-        txtGarantia = new javax.swing.JTextField();
         txtNombreProducto = new javax.swing.JTextField();
         txtUnidades = new javax.swing.JTextField();
         txtPrecio = new javax.swing.JTextField();
@@ -81,6 +80,7 @@ public class Nuevo extends javax.swing.JDialog {
         cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
         cmdSalir = new javax.swing.JButton();
+        cmbGarantia = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LOTE");
@@ -88,94 +88,54 @@ public class Nuevo extends javax.swing.JDialog {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Tipo");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 80, 20));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 30, 80, 30));
 
         jLabel2.setText("Nombre del Producto");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 130, 20));
 
         jLabel3.setText("Garantía");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 90, 60, 20));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 70, 40));
 
         jLabel4.setText("Marca");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 60, 50, 20));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 80, 30));
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios" }));
-        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 30, 120, -1));
-        jPanel1.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 90, 120, -1));
-        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 120, -1));
-        jPanel1.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 120, -1));
-        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 120, -1));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios", " " }));
+        jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 150, -1));
+        jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 160, -1));
+        jPanel1.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, -1));
+        jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 160, -1));
 
         jLabel6.setText("Precio");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 110, 20));
+        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 110, 40));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Clasificación"));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         CheckConsumo.setText("De consumo");
+        jPanel2.add(CheckConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 30));
 
         CheckNegocio.setText("De Negocio");
+        jPanel2.add(CheckNegocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, 30));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(CheckConsumo)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(CheckNegocio)
-                .addGap(725, 725, 725))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CheckConsumo)
-                    .addComponent(CheckNegocio))
-                .addGap(0, 14, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 130, 240, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 150, 250, 60));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Género"));
+        jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        GRbGenero.add(RbUnisex);
         RbUnisex.setText("Unisex");
+        jPanel3.add(RbUnisex, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 28, -1, -1));
 
-        GRbGenero.add(RbMasculino);
         RbMasculino.setText("Masculino");
+        jPanel3.add(RbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 28, -1, -1));
 
-        GRbGenero.add(RbFemenino);
         RbFemenino.setText("Femenino");
+        jPanel3.add(RbFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 28, -1, -1));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(RbUnisex)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RbMasculino)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(RbFemenino, javax.swing.GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(RbUnisex)
-                    .addComponent(RbMasculino)
-                    .addComponent(RbFemenino))
-                .addGap(0, 14, Short.MAX_VALUE))
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 130, 270, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 150, 270, 60));
 
         jLabel5.setText("Unidades");
-        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 110, 20));
-        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 60, 120, -1));
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 110, 40));
+        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 150, -1));
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -237,15 +197,16 @@ public class Nuevo extends javax.swing.JDialog {
         });
         jPanel4.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 80, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 560, 71));
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 460, 71));
+
+        cmbGarantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 Meses", "6 Meses", "9 Meses", "12 Meses" }));
+        jPanel1.add(cmbGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 738, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -254,8 +215,42 @@ public class Nuevo extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(754, 505));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
+        int i;
+
+        productos = Helper.traerDatos(ruta);
+        i = tblProductos.getSelectedRow();
+        p = productos.get(i);
+
+        txtNombreProducto.setText(p.getNombre());
+        cmbGarantia.setSelectedItem(p.getGarantia());
+        txtMarca.setText(p.getMarca());
+        txtPrecio.setText(String.valueOf(p.getPrecio()));
+        txtUnidades.setText(String.valueOf(p.getUnidades()));
+        cmbTipo.setSelectedItem(p.getTipo());
+
+        GRbGenero.clearSelection();
+        CheckConsumo.setSelected(false);
+        CheckNegocio.setSelected(false);
+
+    }//GEN-LAST:event_tblProductosMouseClicked
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        txtNombreProducto.setText("");
+        txtPrecio.setText("");
+        txtMarca.setText("");
+        cmbGarantia.getSelectedIndex();
+        txtUnidades.setText("");
+        cmbTipo.setSelectedIndex(0);
+        GRbGenero.clearSelection();
+        CheckConsumo.setSelected(false);
+        CheckNegocio.setSelected(false);
+        txtNombreProducto.requestFocusInWindow();
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
 
@@ -266,7 +261,7 @@ public class Nuevo extends javax.swing.JDialog {
 
             Nombre = txtNombreProducto.getText();
             Marca = txtMarca.getText();
-            Garantia = txtGarantia.getText();
+            Garantia = (String) cmbGarantia.getSelectedItem();
             Tipo = (String) cmbTipo.getSelectedItem();
             Unidades = Integer.parseInt(txtUnidades.getText());
             Precio = Double.parseDouble(txtPrecio.getText());
@@ -298,29 +293,7 @@ public class Nuevo extends javax.swing.JDialog {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
-
     }//GEN-LAST:event_cmdGuardarActionPerformed
-
-    private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
-        int i;
-
-        productos = Helper.traerDatos(ruta);
-        i = tblProductos.getSelectedRow();
-        p = productos.get(i);
-
-        txtNombreProducto.setText(p.getNombre());
-        txtGarantia.setText(p.getGarantia());
-        txtMarca.setText(p.getMarca());
-        txtPrecio.setText(String.valueOf(p.getPrecio()));
-        txtUnidades.setText(String.valueOf(p.getUnidades()));
-        cmbTipo.setSelectedItem(p.getTipo());
-
-        GRbGenero.clearSelection();
-        CheckConsumo.setSelected(false);
-        CheckNegocio.setSelected(false);
-
-
-    }//GEN-LAST:event_tblProductosMouseClicked
 
     private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
         int i, op;
@@ -338,7 +311,7 @@ public class Nuevo extends javax.swing.JDialog {
                 txtNombreProducto.setText("");
                 txtPrecio.setText("");
                 txtMarca.setText("");
-                txtGarantia.setText("");
+                cmbGarantia.getSelectedIndex();
                 txtUnidades.setText("");
                 cmbTipo.setSelectedIndex(0);
                 txtNombreProducto.requestFocusInWindow();
@@ -349,19 +322,6 @@ public class Nuevo extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_cmdEliminarActionPerformed
-
-    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
-        txtNombreProducto.setText("");
-        txtPrecio.setText("");
-        txtMarca.setText("");
-        txtGarantia.setText("");
-        txtUnidades.setText("");
-        cmbTipo.setSelectedIndex(0);
-        GRbGenero.clearSelection();
-        CheckConsumo.setSelected(false);
-        CheckNegocio.setSelected(false);
-        txtNombreProducto.requestFocusInWindow();
-    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
         System.exit(0);
@@ -417,6 +377,7 @@ public class Nuevo extends javax.swing.JDialog {
     private javax.swing.JRadioButton RbFemenino;
     private javax.swing.JRadioButton RbMasculino;
     private javax.swing.JRadioButton RbUnisex;
+    private javax.swing.JComboBox<String> cmbGarantia;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdGuardar;
@@ -434,7 +395,6 @@ public class Nuevo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductos;
-    private javax.swing.JTextField txtGarantia;
     private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecio;
