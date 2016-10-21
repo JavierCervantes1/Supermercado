@@ -209,6 +209,9 @@
           <SubComponents>
             <Component class="javax.swing.JRadioButton" name="RbUnisex">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="GRbGenero"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Unisex"/>
               </Properties>
               <Constraints>
@@ -219,6 +222,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="RbMasculino">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="GRbGenero"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Masculino"/>
               </Properties>
               <Constraints>
@@ -229,6 +235,9 @@
             </Component>
             <Component class="javax.swing.JRadioButton" name="RbFemenino">
               <Properties>
+                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                  <ComponentRef name="GRbGenero"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Femenino"/>
               </Properties>
               <Constraints>
@@ -368,11 +377,15 @@
         <Component class="javax.swing.JComboBox" name="cmbGarantia">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="4">
-                <StringItem index="0" value="3 Meses"/>
-                <StringItem index="1" value="6 Meses"/>
-                <StringItem index="2" value="9 Meses"/>
-                <StringItem index="3" value="12 Meses"/>
+              <StringArray count="8">
+                <StringItem index="0" value="1 Mes"/>
+                <StringItem index="1" value="2 Meses"/>
+                <StringItem index="2" value="3 Meses"/>
+                <StringItem index="3" value="6 Meses"/>
+                <StringItem index="4" value="9 Meses"/>
+                <StringItem index="5" value="1 A&#xf1;o"/>
+                <StringItem index="6" value="2 A&#xf1;os"/>
+                <StringItem index="7" value="3 A&#xf1;os"/>
               </StringArray>
             </Property>
           </Properties>

@@ -122,12 +122,15 @@ public class Nuevo extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Género"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        GRbGenero.add(RbUnisex);
         RbUnisex.setText("Unisex");
         jPanel3.add(RbUnisex, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 28, -1, -1));
 
+        GRbGenero.add(RbMasculino);
         RbMasculino.setText("Masculino");
         jPanel3.add(RbMasculino, new org.netbeans.lib.awtextra.AbsoluteConstraints(86, 28, -1, -1));
 
+        GRbGenero.add(RbFemenino);
         RbFemenino.setText("Femenino");
         jPanel3.add(RbFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 28, -1, -1));
 
@@ -199,7 +202,7 @@ public class Nuevo extends javax.swing.JDialog {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 220, 460, 71));
 
-        cmbGarantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "3 Meses", "6 Meses", "9 Meses", "12 Meses" }));
+        cmbGarantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Mes", "2 Meses", "3 Meses", "6 Meses", "9 Meses", "1 Año", "2 Años", "3 Años" }));
         jPanel1.add(cmbGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 150, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -243,7 +246,7 @@ public class Nuevo extends javax.swing.JDialog {
         txtNombreProducto.setText("");
         txtPrecio.setText("");
         txtMarca.setText("");
-        cmbGarantia.getSelectedIndex();
+        cmbGarantia.setSelectedIndex(0);
         txtUnidades.setText("");
         cmbTipo.setSelectedIndex(0);
         GRbGenero.clearSelection();
