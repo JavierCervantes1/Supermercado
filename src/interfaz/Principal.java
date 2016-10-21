@@ -48,8 +48,8 @@ public class Principal extends javax.swing.JFrame {
         setTitle("TIENDA");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/portada.jpg"))); // NOI18N
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 320));
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/portada1.jpg"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 460, 260));
 
         jMenuBar1.setBackground(new java.awt.Color(0, 0, 0));
         jMenuBar1.setForeground(new java.awt.Color(255, 0, 0));
@@ -102,7 +102,7 @@ public class Principal extends javax.swing.JFrame {
 
         setJMenuBar(jMenuBar1);
 
-        setSize(new java.awt.Dimension(597, 383));
+        setSize(new java.awt.Dimension(476, 318));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
