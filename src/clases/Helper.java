@@ -17,7 +17,9 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -155,4 +157,60 @@ public class Helper {
             
         }
     }
+    
+    public static void radioButtons(String genero, String ruta, JTable tabla, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
+        int i;
+        Producto p;
+        
+        ArrayList<Producto> productos = Helper.traerDatos(ruta);
+        i = tabla.getSelectedRow();
+        p = productos.get(i);
+        
+        genero = p.getGenero();
+        
+        if(genero.equalsIgnoreCase("Masculino")){
+            radiob2.setSelected(true);
+        }
+        if(genero.equalsIgnoreCase("Femenino")){
+            radiob3.setSelected(true);
+        }
+        if(genero.equalsIgnoreCase("Unisex")){
+            radiob.setSelected(true);
+        }
+    }
+    public static void checkBoxes(String clasificacion, String ruta, JTable tabla, JCheckBox Check, JCheckBox Check2){
+        int i;
+        Producto p;
+        
+        ArrayList<Producto> productos = Helper.traerDatos(ruta);
+        i = tabla.getSelectedRow();
+        p = productos.get(i);
+        
+        clasificacion = p.getClasificacion();
+        
+        if(clasificacion.equalsIgnoreCase("De consumo")){
+            Check.setSelected(true);
+            Check2.setSelected(false);
+        }
+        if(clasificacion.equalsIgnoreCase("De Negocio")){
+            Check2.setSelected(true);
+            Check.setSelected(false);
+        }
+        if(clasificacion.equalsIgnoreCase("De consumo y De Negocio")){
+            Check.setSelected(true);
+            Check2.setSelected(true);
+        }
+    }
+    /*public void Genero(JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
+        
+        if(radiob.isSelected()){
+           radiob.getLabel();
+        }
+        if(radiob2.isSelected()){
+            radiob2.getLabel();
+        }
+        if(radiob3.isSelected()){
+            radiob3.getLabel();
+        }
+    }*/
 }

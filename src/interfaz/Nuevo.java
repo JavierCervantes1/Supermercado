@@ -100,7 +100,7 @@ public class Nuevo extends javax.swing.JDialog {
         jLabel4.setText("Marca");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 80, 30));
 
-        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios", " " }));
+        cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios" }));
         jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 150, -1));
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 160, -1));
         jPanel1.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, -1));
@@ -225,7 +225,7 @@ public class Nuevo extends javax.swing.JDialog {
 
     private void tblProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblProductosMouseClicked
         int i;
-        String genero;
+        String genero, clasificacion;
 
         productos = Helper.traerDatos(ruta);
         i = tblProductos.getSelectedRow();
@@ -239,17 +239,11 @@ public class Nuevo extends javax.swing.JDialog {
         cmbTipo.setSelectedItem(p.getTipo());
 
         genero = p.getGenero();
+        clasificacion = p.getClasificacion();
         
-        GRbGenero.clearSelection();
-        CheckConsumo.setSelected(false);
-        CheckNegocio.setSelected(false);
+        Helper.radioButtons(genero, ruta, tblProductos, RbUnisex, RbMasculino, RbFemenino);
+        Helper.checkBoxes(clasificacion, ruta, tblProductos, CheckConsumo, CheckNegocio);
         
-        if(genero.equalsIgnoreCase("Masculino")){
-            RbMasculino.setSelected(true);
-        }
-        
-        
-
     }//GEN-LAST:event_tblProductosMouseClicked
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
@@ -278,6 +272,8 @@ public class Nuevo extends javax.swing.JDialog {
             Tipo = (String) cmbTipo.getSelectedItem();
             Unidades = Integer.parseInt(txtUnidades.getText());
             Precio = Double.parseDouble(txtPrecio.getText());
+            
+            //Genero = p.Genero(Genero, RbUnisex, RbMasculino, RbFemenino);
 
             if (RbUnisex.isSelected()) {
                 Genero = RbUnisex.getLabel();
