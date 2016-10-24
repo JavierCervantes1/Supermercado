@@ -73,7 +73,6 @@ public class Nuevo extends javax.swing.JDialog {
         RbMasculino = new javax.swing.JRadioButton();
         RbFemenino = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
-        txtMarca = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
@@ -82,6 +81,7 @@ public class Nuevo extends javax.swing.JDialog {
         cmdEliminar = new javax.swing.JButton();
         cmdSalir = new javax.swing.JButton();
         cmbGarantia = new javax.swing.JComboBox<>();
+        cmbMarca = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LOTE");
@@ -98,7 +98,7 @@ public class Nuevo extends javax.swing.JDialog {
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 100, 70, 40));
 
         jLabel4.setText("Marca");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 70, 80, 30));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 60, 80, 40));
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios" }));
         jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 150, -1));
@@ -139,7 +139,6 @@ public class Nuevo extends javax.swing.JDialog {
 
         jLabel5.setText("Unidades");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 110, 40));
-        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 150, -1));
 
         tblProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -206,6 +205,9 @@ public class Nuevo extends javax.swing.JDialog {
         cmbGarantia.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Mes", "2 Meses", "3 Meses", "6 Meses", "9 Meses", "1 Año", "2 Años", "3 Años" }));
         jPanel1.add(cmbGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 110, 150, -1));
 
+        cmbMarca.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Acer", "Adidas", "Apple", "Arturo Calle", "Bosi", "Calvin Klein", "Chanel", "Coach", "Compaq", "Converse", "Dell", "Diesel", "Epson", "Gucci", "H&M", "Herpés París", "Koaj", "Lacoste", "Lenovo", "Lg", "L'oreal", "Louis Vuitton", "Motorola", "New Balance", "Nike", "Panasonic", "Philips", "Prada", "Puma", "Quest", "QuickSilver", "Ralph Lauren", "Reebok", "Samsung", "Sony", "Tommy Hilfiger", "Toshiba", "Totto", "Umbro", "Vans", "Victor", "Zara" }));
+        jPanel1.add(cmbMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 70, 150, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -233,23 +235,23 @@ public class Nuevo extends javax.swing.JDialog {
 
         txtNombreProducto.setText(p.getNombre());
         cmbGarantia.setSelectedItem(p.getGarantia());
-        txtMarca.setText(p.getMarca());
+        cmbMarca.setSelectedItem(p.getMarca());
         txtPrecio.setText(String.valueOf(p.getPrecio()));
         txtUnidades.setText(String.valueOf(p.getUnidades()));
         cmbTipo.setSelectedItem(p.getTipo());
 
         genero = p.getGenero();
         clasificacion = p.getClasificacion();
-        
+
         Helper.radioButtons(genero, ruta, tblProductos, RbUnisex, RbMasculino, RbFemenino);
         Helper.checkBoxes(clasificacion, ruta, tblProductos, CheckConsumo, CheckNegocio);
-        
+
     }//GEN-LAST:event_tblProductosMouseClicked
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
         txtNombreProducto.setText("");
         txtPrecio.setText("");
-        txtMarca.setText("");
+        cmbMarca.setSelectedIndex(0);
         cmbGarantia.setSelectedIndex(0);
         txtUnidades.setText("");
         cmbTipo.setSelectedIndex(0);
@@ -267,14 +269,13 @@ public class Nuevo extends javax.swing.JDialog {
             int Unidades;
 
             Nombre = txtNombreProducto.getText();
-            Marca = txtMarca.getText();
+            Marca = (String) cmbMarca.getSelectedItem();
             Garantia = (String) cmbGarantia.getSelectedItem();
             Tipo = (String) cmbTipo.getSelectedItem();
             Unidades = Integer.parseInt(txtUnidades.getText());
             Precio = Double.parseDouble(txtPrecio.getText());
-            
-            //Genero = p.Genero(Genero, RbUnisex, RbMasculino, RbFemenino);
 
+            //Genero = p.Genero(Genero, RbUnisex, RbMasculino, RbFemenino);
             if (RbUnisex.isSelected()) {
                 Genero = RbUnisex.getLabel();
             }
@@ -319,8 +320,8 @@ public class Nuevo extends javax.swing.JDialog {
                 Helper.llenadoTabla(tblProductos, ruta);
                 txtNombreProducto.setText("");
                 txtPrecio.setText("");
-                txtMarca.setText("");
-                cmbGarantia.getSelectedIndex();
+                cmbMarca.setSelectedIndex(0);
+                cmbGarantia.setSelectedIndex(0);
                 txtUnidades.setText("");
                 cmbTipo.setSelectedIndex(0);
                 txtNombreProducto.requestFocusInWindow();
@@ -333,7 +334,7 @@ public class Nuevo extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
-         setVisible(false);
+        setVisible(false);
     }//GEN-LAST:event_cmdSalirActionPerformed
 
     /**
@@ -387,6 +388,7 @@ public class Nuevo extends javax.swing.JDialog {
     private javax.swing.JRadioButton RbMasculino;
     private javax.swing.JRadioButton RbUnisex;
     private javax.swing.JComboBox<String> cmbGarantia;
+    private javax.swing.JComboBox<String> cmbMarca;
     private javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdGuardar;
@@ -404,7 +406,6 @@ public class Nuevo extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tblProductos;
-    private javax.swing.JTextField txtMarca;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtPrecio;
     private javax.swing.JTextField txtUnidades;
