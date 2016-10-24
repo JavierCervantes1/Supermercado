@@ -38,9 +38,9 @@ public class Principal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         mnVenta = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
+        mnMercancia = new javax.swing.JMenuItem();
         MnClientes = new javax.swing.JMenuItem();
         mnFacturas = new javax.swing.JMenuItem();
-        mnMercancia = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -96,6 +96,10 @@ public class Principal extends javax.swing.JFrame {
         jMenu2.setText("Reportes");
         jMenu2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
+        mnMercancia.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnMercancia.setText("Mercancia");
+        jMenu2.add(mnMercancia);
+
         MnClientes.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         MnClientes.setText("Clientes");
         jMenu2.add(MnClientes);
@@ -103,10 +107,6 @@ public class Principal extends javax.swing.JFrame {
         mnFacturas.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         mnFacturas.setText("Facturas");
         jMenu2.add(mnFacturas);
-
-        mnMercancia.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        mnMercancia.setText("Mercancia");
-        jMenu2.add(mnMercancia);
 
         jMenuBar1.add(jMenu2);
 

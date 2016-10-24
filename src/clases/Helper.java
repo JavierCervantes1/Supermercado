@@ -123,6 +123,27 @@ public class Helper {
         }
         
     }
+    public static void llenadoTabla(JTable tabla, ArrayList<Producto> productos){
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel)tabla.getModel();
+        nf = productos.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+           tm.setValueAt(i+1, i, 0);
+           tm.setValueAt(productos.get(i).getNombre(), i, 1);
+           tm.setValueAt(productos.get(i).getTipo(), i, 2);
+           tm.setValueAt(productos.get(i).getMarca(), i, 3);
+           tm.setValueAt(productos.get(i).getUnidades(), i, 4);
+           tm.setValueAt(productos.get(i).getGarantia(), i, 5);
+           tm.setValueAt(productos.get(i).getGenero(), i, 6);
+           tm.setValueAt(productos.get(i).getClasificacion(), i, 7);
+           tm.setValueAt(productos.get(i).getPrecio(), i, 8);
+           
+        }
+        
+    }
     
     public static ArrayList traerDatos(String ruta){
         FileInputStream archivo;
@@ -213,4 +234,29 @@ public class Helper {
             radiob3.getLabel();
         }
     }*/
+    public static void mercancia(JTable tabla, String ruta, String tipo, String marca, String garantia, String genero, String clasificacion){
+        ArrayList<Producto> productos = traerDatos(ruta);
+        ArrayList<Producto> productosFiltro = new ArrayList();
+        
+        for (int i = 0; i < productos.size(); i++) {
+            
+            if(productos.get(i).getTipo().equals(tipo)){
+                productosFiltro.add(productos.get(i));
+            }
+            if(productos.get(i).getMarca().equals(marca)){
+                productosFiltro.add(productos.get(i));
+            }
+            if(productos.get(i).getGarantia().equals(garantia)){
+                productosFiltro.add(productos.get(i));
+            }
+            if(productos.get(i).getGenero().equals(genero)){
+                productosFiltro.add(productos.get(i));
+            }
+            if(productos.get(i).getClasificacion().equals(clasificacion)){
+                productosFiltro.add(productos.get(i));
+            }
+        }
+        llenadoTabla(tabla, productosFiltro);
+    }
+
 }
