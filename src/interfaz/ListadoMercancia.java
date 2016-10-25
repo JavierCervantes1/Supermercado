@@ -34,8 +34,6 @@ public class ListadoMercancia extends javax.swing.JDialog {
 
         GRbGenero = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblProductos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -50,43 +48,27 @@ public class ListadoMercancia extends javax.swing.JDialog {
         jPanel4 = new javax.swing.JPanel();
         cmdLimpiar = new javax.swing.JButton();
         cmdListar = new javax.swing.JButton();
+        cmdSalir = new javax.swing.JButton();
         txtGarantia = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("LISTAR MERCANCIA");
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "No.", "Producto", "Tipo", "Marca", "Unidades", "Garantía", "Género", "Clasificación", "Precio"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblProductos);
-
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 220, 740, 150));
-
         jLabel1.setText("Tipo");
-        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 80, 30));
+        jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 80, 30));
 
         jLabel3.setText("Garantía");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 70, 40));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 100, 70, 40));
 
         jLabel4.setText("Marca");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 70, 80, 30));
-        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 70, 150, -1));
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 80, 30));
+        jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 150, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Género"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -103,7 +85,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
         RbFemenino.setText("Femenino");
         jPanel3.add(RbFemenino, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 28, -1, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, 270, 60));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, 270, 60));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Clasificación"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -114,7 +96,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
         CheckNegocio.setText("De Negocio");
         jPanel2.add(CheckNegocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 20, -1, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 250, 60));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 180, 250, 60));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -135,22 +117,41 @@ public class ListadoMercancia extends javax.swing.JDialog {
         });
         jPanel4.add(cmdListar, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 90, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 130, 120));
-        jPanel1.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 110, 150, -1));
-        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 150, -1));
+        cmdSalir.setText("Salir");
+        cmdSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdSalirActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 90, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-        );
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 130, 150));
+        jPanel1.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 150, -1));
+        jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 150, -1));
 
-        setSize(new java.awt.Dimension(756, 409));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 270));
+
+        tblProductos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No.", "Producto", "Tipo", "Marca", "Unidades", "Garantía", "Género", "Clasificación", "Precio"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblProductos);
+
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 740, 190));
+
+        setSize(new java.awt.Dimension(756, 495));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -201,6 +202,10 @@ public class ListadoMercancia extends javax.swing.JDialog {
         CheckNegocio.setSelected(false);
         txtTipo.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
+        setVisible(false);
+    }//GEN-LAST:event_cmdSalirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -253,6 +258,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
     private javax.swing.JRadioButton RbUnisex;
     private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdListar;
+    private javax.swing.JButton cmdSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

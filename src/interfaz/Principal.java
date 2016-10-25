@@ -7,15 +7,18 @@ package interfaz;
 
 /**
  *
-  * @author Liborio Castañeda - Javier Cervantes
+ * @author Liborio Castañeda - Javier Cervantes
  */
 public class Principal extends javax.swing.JFrame {
 
     /**
      * Creates new form Principal
      */
+    String ruta;
+
     public Principal() {
         initComponents();
+        ruta = "src/datos/Productos.txt";
     }
 
     /**
@@ -31,15 +34,14 @@ public class Principal extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        mnNuevoProducto = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         mnSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
-        mnVenta = new javax.swing.JMenuItem();
+        mnNuevoCliente = new javax.swing.JMenuItem();
+        mnNuevoProducto = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnMercancia = new javax.swing.JMenuItem();
-        MnClientes = new javax.swing.JMenuItem();
+        mnClientes = new javax.swing.JMenuItem();
         mnFacturas = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
@@ -58,19 +60,6 @@ public class Principal extends javax.swing.JFrame {
 
         jMenu1.setText("Sistema");
         jMenu1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
-
-        mnNuevoProducto.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        mnNuevoProducto.setText("Registrar Producto");
-        mnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnNuevoProductoActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnNuevoProducto);
-
-        jMenuItem6.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        jMenuItem6.setText("Registrar Cliente");
-        jMenu1.add(jMenuItem6);
         jMenu1.add(jSeparator1);
 
         mnSalir.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -87,9 +76,23 @@ public class Principal extends javax.swing.JFrame {
         jMenu3.setText("Pedidos");
         jMenu3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
-        mnVenta.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        mnVenta.setText("Agregar Venta");
-        jMenu3.add(mnVenta);
+        mnNuevoCliente.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnNuevoCliente.setText("Agregar Cliente");
+        mnNuevoCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnNuevoClienteActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnNuevoCliente);
+
+        mnNuevoProducto.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnNuevoProducto.setText("Agregar Producto");
+        mnNuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnNuevoProductoActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnNuevoProducto);
 
         jMenuBar1.add(jMenu3);
 
@@ -98,11 +101,21 @@ public class Principal extends javax.swing.JFrame {
 
         mnMercancia.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         mnMercancia.setText("Mercancia");
+        mnMercancia.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnMercanciaActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnMercancia);
 
-        MnClientes.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        MnClientes.setText("Clientes");
-        jMenu2.add(MnClientes);
+        mnClientes.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnClientes.setText("Clientes");
+        mnClientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnClientesActionPerformed(evt);
+            }
+        });
+        jMenu2.add(mnClientes);
 
         mnFacturas.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         mnFacturas.setText("Facturas");
@@ -117,13 +130,28 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoProductoActionPerformed
-        Nuevo n = new Nuevo(this,true);
-            n.setVisible(true);
+        Nuevo n = new Nuevo(this, true);
+        n.setVisible(true);
     }//GEN-LAST:event_mnNuevoProductoActionPerformed
+
+    private void mnMercanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMercanciaActionPerformed
+        ListadoMercancia m = new ListadoMercancia(this, true);
+        m.setVisible(true);
+    }//GEN-LAST:event_mnMercanciaActionPerformed
+
+    private void mnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoClienteActionPerformed
+        RegistroCliente r = new RegistroCliente(this, true);
+        r.setVisible(true);
+    }//GEN-LAST:event_mnNuevoClienteActionPerformed
 
     private void mnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_mnSalirActionPerformed
+
+    private void mnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnClientesActionPerformed
+        ListadoClientes l = new ListadoClientes(this, true);
+        l.setVisible(true);
+    }//GEN-LAST:event_mnClientesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -161,19 +189,19 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem MnClientes;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JMenuItem mnClientes;
     private javax.swing.JMenuItem mnFacturas;
     private javax.swing.JMenuItem mnMercancia;
+    private javax.swing.JMenuItem mnNuevoCliente;
     private javax.swing.JMenuItem mnNuevoProducto;
     private javax.swing.JMenuItem mnSalir;
-    private javax.swing.JMenuItem mnVenta;
     // End of variables declaration//GEN-END:variables
+
 }
