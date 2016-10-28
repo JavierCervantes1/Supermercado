@@ -12,6 +12,7 @@ import clases.Helper;
  * @author Jcervant23
  */
 public class ListadoMercancia extends javax.swing.JDialog {
+
     String ruta;
 
     /**
@@ -159,30 +160,30 @@ public class ListadoMercancia extends javax.swing.JDialog {
         String tipo = txtTipo.getText();
         String marca = txtMarca.getText();
         String garantia = txtGarantia.getText();
-        String genero="", clasificacion="";
-        
-        if (RbUnisex.isSelected()) {
-                genero = RbUnisex.getLabel();
-            }
-            if (RbMasculino.isSelected()) {
-                genero = RbMasculino.getLabel();
-            }
-            if (RbFemenino.isSelected()) {
-                genero = RbFemenino.getLabel();
-            }
+        String genero = "", clasificacion = "";
 
-            if (CheckConsumo.isSelected()) {
-                clasificacion = CheckConsumo.getLabel();
-            }
-            if (CheckNegocio.isSelected()) {
-                clasificacion = CheckNegocio.getLabel();
-            }
-            if (CheckConsumo.isSelected() && CheckNegocio.isSelected()) {
-                clasificacion = CheckConsumo.getLabel() + " y " + CheckNegocio.getLabel();
-            }
-            
-            Helper.mercancia(tblProductos, ruta, tipo, marca, garantia, genero, clasificacion);
-           
+        if (RbUnisex.isSelected()) {
+            genero = RbUnisex.getLabel();
+        }
+        if (RbMasculino.isSelected()) {
+            genero = RbMasculino.getLabel();
+        }
+        if (RbFemenino.isSelected()) {
+            genero = RbFemenino.getLabel();
+        }
+
+        if (CheckConsumo.isSelected()) {
+            clasificacion = CheckConsumo.getLabel();
+        }
+        if (CheckNegocio.isSelected()) {
+            clasificacion = CheckNegocio.getLabel();
+        }
+        if (CheckConsumo.isSelected() && CheckNegocio.isSelected()) {
+            clasificacion = CheckConsumo.getLabel() + " y " + CheckNegocio.getLabel();
+        }
+
+        Helper.mercancia(tblProductos, ruta, tipo, marca, garantia, genero, clasificacion);
+
         txtMarca.setText("");
         txtGarantia.setText("");
         txtTipo.setText("");
@@ -190,7 +191,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
         CheckNegocio.setSelected(false);
         GRbGenero.clearSelection();
         txtTipo.requestFocusInWindow();
-        
+
     }//GEN-LAST:event_cmdListarActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed

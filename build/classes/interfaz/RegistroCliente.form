@@ -133,7 +133,7 @@
                   <StringArray count="3">
                     <StringItem index="0" value="Masculino"/>
                     <StringItem index="1" value="Femenino"/>
-                    <StringItem index="2" value="Indefinido"/>
+                    <StringItem index="2" value="Sin definir"/>
                   </StringArray>
                 </Property>
               </Properties>
@@ -168,7 +168,7 @@
                     <Column editable="false" title="C&#xe9;dula" type="java.lang.Object"/>
                     <Column editable="false" title="Nombre" type="java.lang.Object"/>
                     <Column editable="false" title="Apellido" type="java.lang.Object"/>
-                    <Column editable="false" title="DNI" type="java.lang.Object"/>
+                    <Column editable="false" title="Sexo" type="java.lang.Object"/>
                   </Table>
                 </Property>
               </Properties>
@@ -197,6 +197,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Guardar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdGuardarActionPerformed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="30" y="20" width="120" height="-1"/>

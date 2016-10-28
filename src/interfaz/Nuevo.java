@@ -84,7 +84,7 @@ public class Nuevo extends javax.swing.JDialog {
         cmbMarca = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("LOTE");
+        setTitle("MERCANCIA");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -112,7 +112,7 @@ public class Nuevo extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Clasificación"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CheckConsumo.setText("De consumo");
+        CheckConsumo.setText("De Consumo");
         jPanel2.add(CheckConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 30));
 
         CheckNegocio.setText("De Negocio");
@@ -275,26 +275,8 @@ public class Nuevo extends javax.swing.JDialog {
             Unidades = Integer.parseInt(txtUnidades.getText());
             Precio = Double.parseDouble(txtPrecio.getText());
 
-            //Genero = p.Genero(Genero, RbUnisex, RbMasculino, RbFemenino);
-            if (RbUnisex.isSelected()) {
-                Genero = RbUnisex.getLabel();
-            }
-            if (RbMasculino.isSelected()) {
-                Genero = RbMasculino.getLabel();
-            }
-            if (RbFemenino.isSelected()) {
-                Genero = RbFemenino.getLabel();
-            }
-
-            if (CheckConsumo.isSelected()) {
-                Clasificacion = CheckConsumo.getLabel();
-            }
-            if (CheckNegocio.isSelected()) {
-                Clasificacion = CheckNegocio.getLabel();
-            }
-            if (CheckConsumo.isSelected() && CheckNegocio.isSelected()) {
-                Clasificacion = CheckConsumo.getLabel() + " y " + CheckNegocio.getLabel();
-            }
+            Genero = Helper.getGenero(Genero, RbUnisex, RbMasculino, RbFemenino);
+            Clasificacion = Helper.getClasificacion(Clasificacion, CheckConsumo, CheckNegocio);
 
             Producto p = new Producto(Nombre, Tipo, Marca, Garantia, Genero, Clasificacion, Unidades, Precio);
 

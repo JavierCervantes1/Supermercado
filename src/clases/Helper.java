@@ -209,7 +209,7 @@ public class Helper {
         
         clasificacion = p.getClasificacion();
         
-        if(clasificacion.equalsIgnoreCase("De consumo")){
+        if(clasificacion.equalsIgnoreCase("De Consumo")){
             Check.setSelected(true);
             Check2.setSelected(false);
         }
@@ -217,30 +217,44 @@ public class Helper {
             Check2.setSelected(true);
             Check.setSelected(false);
         }
-        if(clasificacion.equalsIgnoreCase("De consumo y De Negocio")){
+        if(clasificacion.equalsIgnoreCase("De Consumo y De Negocio")){
             Check.setSelected(true);
             Check2.setSelected(true);
         }
     }
-    /*public void Genero(JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
+    public static String getGenero(String genero, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
         
         if(radiob.isSelected()){
-           radiob.getLabel();
+           genero = radiob.getText();
         }
         if(radiob2.isSelected()){
-            radiob2.getLabel();
+             genero = radiob2.getText();
         }
         if(radiob3.isSelected()){
-            radiob3.getLabel();
+            genero = radiob3.getText();
         }
-    }*/
+        return genero;
+    }
+    public static String getClasificacion(String clasificacion, JCheckBox Check, JCheckBox Check2){
+        
+        if(Check.isSelected()){
+           clasificacion = Check.getText();
+        }
+        if(Check2.isSelected()){
+             clasificacion = Check2.getText();
+        }
+        if (Check.isSelected() && Check2.isSelected()){
+        clasificacion = Check.getText() + " y " + Check2.getText();
+        }
+        return clasificacion;
+    }
     public static void mercancia(JTable tabla, String ruta, String tipo, String marca, String garantia, String genero, String clasificacion){
         ArrayList<Producto> productos = traerDatos(ruta);
         ArrayList<Producto> productosFiltro = new ArrayList();
         
         for (int i = 0; i < productos.size(); i++) {
             
-            if(productos.get(i).getTipo().equals(tipo)){
+            if(productos.get(i).getTipo().equalsIgnoreCase(tipo)){
                 productosFiltro.add(productos.get(i));
             }
             if(productos.get(i).getMarca().equals(marca)){

@@ -70,7 +70,7 @@ public class RegistroCliente extends javax.swing.JDialog {
         jPanel3.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 170, -1));
         jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 170, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Indefinido" }));
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Sin definir" }));
         jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 170, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 310, 180));
@@ -80,7 +80,7 @@ public class RegistroCliente extends javax.swing.JDialog {
 
             },
             new String [] {
-                "No.", "Cédula", "Nombre", "Apellido", "DNI"
+                "No.", "Cédula", "Nombre", "Apellido", "Sexo"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -99,6 +99,11 @@ public class RegistroCliente extends javax.swing.JDialog {
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdGuardar.setText("Guardar");
+        cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdGuardarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, -1));
 
         cmdEliminar.setText("Eliminar");
@@ -137,6 +142,10 @@ public class RegistroCliente extends javax.swing.JDialog {
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_cmdSalirActionPerformed
+
+    private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
+        
+    }//GEN-LAST:event_cmdGuardarActionPerformed
 
     /**
      * @param args the command line arguments

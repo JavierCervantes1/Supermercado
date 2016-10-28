@@ -30,24 +30,28 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jCheckBoxMenuItem1 = new javax.swing.JCheckBoxMenuItem();
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        mnSalir = new javax.swing.JMenuItem();
         jMenu3 = new javax.swing.JMenu();
         mnNuevoCliente = new javax.swing.JMenuItem();
         mnNuevoProducto = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        mnSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         mnMercancia = new javax.swing.JMenuItem();
         mnClientes = new javax.swing.JMenuItem();
         mnFacturas = new javax.swing.JMenuItem();
 
-        jMenuItem1.setText("jMenuItem1");
+        jCheckBoxMenuItem1.setSelected(true);
+        jCheckBoxMenuItem1.setText("jCheckBoxMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Centro Comercial - Bienvenidos");
+        setTitle("Supermercado - Bienvenidos");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/portada1.jpg"))); // NOI18N
@@ -62,18 +66,7 @@ public class Principal extends javax.swing.JFrame {
         jMenu1.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
         jMenu1.add(jSeparator1);
 
-        mnSalir.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
-        mnSalir.setText("Salir");
-        mnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                mnSalirActionPerformed(evt);
-            }
-        });
-        jMenu1.add(mnSalir);
-
-        jMenuBar1.add(jMenu1);
-
-        jMenu3.setText("Pedidos");
+        jMenu3.setText("Administrar");
         jMenu3.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
         mnNuevoCliente.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
@@ -94,7 +87,27 @@ public class Principal extends javax.swing.JFrame {
         });
         jMenu3.add(mnNuevoProducto);
 
-        jMenuBar1.add(jMenu3);
+        jMenu1.add(jMenu3);
+
+        jMenu4.setText("Compras");
+        jMenu4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
+
+        jMenuItem2.setText("Agregar Compra");
+        jMenu4.add(jMenuItem2);
+
+        jMenu1.add(jMenu4);
+        jMenu1.add(jSeparator2);
+
+        mnSalir.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnSalir.setText("Salir");
+        mnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnSalirActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnSalir);
+
+        jMenuBar1.add(jMenu1);
 
         jMenu2.setText("Reportes");
         jMenu2.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
@@ -149,8 +162,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnSalirActionPerformed
 
     private void mnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnClientesActionPerformed
-        ListadoClientes l = new ListadoClientes(this, true);
-        l.setVisible(true);
+        //ListadoClientes l = new ListadoClientes(this, true);
+        //l.setVisible(true);
     }//GEN-LAST:event_mnClientesActionPerformed
 
     /**
@@ -189,13 +202,16 @@ public class Principal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBoxMenuItem jCheckBoxMenuItem1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JMenuItem mnClientes;
     private javax.swing.JMenuItem mnFacturas;
     private javax.swing.JMenuItem mnMercancia;
