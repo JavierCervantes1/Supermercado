@@ -5,11 +5,24 @@
  */
 package interfaz;
 
+import clases.*;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  *
  * @author user
  */
 public class RegistroCliente extends javax.swing.JDialog {
+
+    String ruta;
+    ObjectOutputStream salida;
+    ArrayList<Persona> personas;
+    Persona c;
 
     /**
      * Creates new form RegistroCliente
@@ -17,6 +30,17 @@ public class RegistroCliente extends javax.swing.JDialog {
     public RegistroCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        try {
+            initComponents();
+            ruta = "src/datos/personas.txt";
+            personas = Helper.traerDatos(ruta);
+            salida = new ObjectOutputStream(new FileOutputStream(ruta));
+            Helper.volcado(salida, personas);
+            Helper.limpiarTabla(tblPersonas);
+            Helper.llenadoTablaClientes(tblPersonas, ruta);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     /**
@@ -37,7 +61,7 @@ public class RegistroCliente extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cmbSexo = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -47,7 +71,7 @@ public class RegistroCliente extends javax.swing.JDialog {
         cmdSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("CLIENTE");
+        setTitle("CLIENTES");
 
         jPanel1.setToolTipText("Registro De Clientes");
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -70,8 +94,8 @@ public class RegistroCliente extends javax.swing.JDialog {
         jPanel3.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 170, -1));
         jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 170, -1));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Sin definir" }));
-        jPanel3.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 170, -1));
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Sin definir" }));
+        jPanel3.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 170, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 310, 180));
 
@@ -89,6 +113,11 @@ public class RegistroCliente extends javax.swing.JDialog {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tblPersonas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tblPersonasMouseClicked(evt);
             }
         });
         jScrollPane1.setViewportView(tblPersonas);
@@ -144,8 +173,39 @@ public class RegistroCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdSalirActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-        
+        try {
+            long Cedula;
+            String Nombre, Apellido, Sexo;
+
+            Cedula = Long.parseLong(txtCedula.getText());
+            Nombre = txtNombre.getText();
+            Apellido = txtApellido.getText();
+            Sexo = (String) cmbSexo.getSelectedItem();
+
+            Persona c = new Persona(Cedula, Nombre, Apellido, Sexo);
+
+            c.guardar(salida);
+            Helper.llenadoTablaClientes(tblPersonas, ruta);
+        } catch (IOException ex) {
+            Logger.getLogger(ex.getMessage());
+        }
+
+
     }//GEN-LAST:event_cmdGuardarActionPerformed
+
+    private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
+        int i;
+        
+        personas = Helper.traerDatos(ruta);
+        i = tblPersonas.getSelectedRow();
+        c = personas.get(i);
+        
+        txtCedula.setText(String.valueOf(c.getCedula()));
+        txtNombre.setText(c.getNombre());
+        txtApellido.setText(c.getApellido());
+        cmbSexo.setSelectedItem(c.getSexo());
+        
+    }//GEN-LAST:event_tblPersonasMouseClicked
 
     /**
      * @param args the command line arguments
@@ -198,11 +258,11 @@ public class RegistroCliente extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbSexo;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdGuardar;
     private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdSalir;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

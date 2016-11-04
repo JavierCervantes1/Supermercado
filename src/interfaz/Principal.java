@@ -143,7 +143,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void mnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoProductoActionPerformed
-        Nuevo n = new Nuevo(this, true);
+        NuevoProducto n = new NuevoProducto(this, true);
         n.setVisible(true);
     }//GEN-LAST:event_mnNuevoProductoActionPerformed
 

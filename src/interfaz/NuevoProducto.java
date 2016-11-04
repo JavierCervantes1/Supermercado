@@ -22,14 +22,14 @@ import javax.swing.JOptionPane;
  *
  * @author user
  */
-public class Nuevo extends javax.swing.JDialog {
+public class NuevoProducto extends javax.swing.JDialog {
 
     String ruta;
     ObjectOutputStream salida;
     ArrayList<Producto> productos;
     Producto p;
 
-    public Nuevo(java.awt.Frame parent, boolean modal) {
+    public NuevoProducto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         try {
             initComponents();
@@ -308,9 +308,9 @@ public class Nuevo extends javax.swing.JDialog {
                 cmbTipo.setSelectedIndex(0);
                 txtNombreProducto.requestFocusInWindow();
             } catch (FileNotFoundException ex) {
-                Logger.getLogger(Nuevo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
             } catch (IOException ex) {
-                Logger.getLogger(Nuevo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_cmdEliminarActionPerformed
@@ -336,21 +336,23 @@ public class Nuevo extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Nuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Nuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Nuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Nuevo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(NuevoProducto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Nuevo dialog = new Nuevo(new javax.swing.JFrame(), true);
+                NuevoProducto dialog = new NuevoProducto(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

@@ -30,8 +30,26 @@ public class Compra extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        txtCedula = new javax.swing.JTextField();
+        cmdBuscarCliente = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
+        txtNombreProducto = new javax.swing.JTextField();
+        cmdBuscarProducto = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        txtUnidades = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        txtCosto = new javax.swing.JTextField();
+        jButton2 = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
+        cmdSalir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -39,27 +57,108 @@ public class Compra extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Comprador"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 490, 130));
+
+        jLabel1.setText("Cédula");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 60, 30));
+        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 150, -1));
+
+        cmdBuscarCliente.setText("Buscar Cliente");
+        jPanel2.add(cmdBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, -1));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No.", "Cédula", "Nombre", "Apellido", "Sexo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 60));
+
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 540, 140));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 490, 130));
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "No.", "Producto", "Marca", "Unidades", "Garantía", "Valor Unitario"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 90));
+
+        jLabel2.setText("Nombre del Producto");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, 20));
+        jPanel3.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
+
+        cmdBuscarProducto.setText("Buscar Producto");
+        jPanel3.add(cmdBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, -1));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 540, 170));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Compra"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 490, 70));
+
+        jLabel3.setText("Unidades a Comprar");
+        jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 20));
+        jPanel4.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
+
+        jButton1.setText("CalcularCosto");
+        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 140, -1));
+
+        jLabel4.setText("Costo Total");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, 20));
+
+        txtCosto.setEditable(false);
+        jPanel4.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 130, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 540, 100));
+
+        jButton2.setText("Registrar Compra");
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 140, -1));
+
+        cmdCancelar.setText("Cancelar");
+        jPanel1.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 130, -1));
+
+        cmdSalir.setText("Salir");
+        jPanel1.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 480, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 541, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 581, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 514, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -108,9 +207,27 @@ public class Compra extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBuscarCliente;
+    private javax.swing.JButton cmdBuscarProducto;
+    private javax.swing.JButton cmdCancelar;
+    private javax.swing.JButton cmdSalir;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField txtCedula;
+    private javax.swing.JTextField txtCosto;
+    private javax.swing.JTextField txtNombreProducto;
+    private javax.swing.JTextField txtUnidades;
     // End of variables declaration//GEN-END:variables
 }

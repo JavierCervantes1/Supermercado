@@ -6,7 +6,7 @@
 package clases;
 
 //import interfaz.Agregar;
-import interfaz.Nuevo;
+import interfaz.NuevoProducto;
 import java.awt.Component;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -145,6 +145,24 @@ public class Helper {
         
     }
     
+    public static void llenadoTablaClientes(JTable tabla, String ruta){
+        int nf;
+        DefaultTableModel tm;
+        ArrayList<Persona> personas = traerDatos(ruta);
+        tm = (DefaultTableModel)tabla.getModel();
+        nf = personas.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+           tm.setValueAt(i+1, i, 0);
+           tm.setValueAt(personas.get(i).getCedula(), i, 1);
+           tm.setValueAt(personas.get(i).getNombre(), i, 2);
+           tm.setValueAt(personas.get(i).getApellido(), i, 3);
+           tm.setValueAt(personas.get(i).getSexo(), i, 4);
+        }
+        
+    }
+    
     public static ArrayList traerDatos(String ruta){
         FileInputStream archivo;
             ObjectInputStream entrada;
@@ -173,7 +191,7 @@ public class Helper {
             try {
                 salida.writeObject(productos.get(i));
             } catch (IOException ex) {
-                Logger.getLogger(Nuevo.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }
