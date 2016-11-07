@@ -6,12 +6,15 @@
 package interfaz;
 
 import clases.*;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -35,7 +38,7 @@ public class RegistroCliente extends javax.swing.JDialog {
             ruta = "src/datos/personas.txt";
             personas = Helper.traerDatos(ruta);
             salida = new ObjectOutputStream(new FileOutputStream(ruta));
-            Helper.volcado(salida, personas);
+            Helper.volcadoClientes(salida, personas);
             Helper.limpiarTabla(tblPersonas);
             Helper.llenadoTablaClientes(tblPersonas, ruta);
         } catch (IOException ex) {
@@ -83,19 +86,19 @@ public class RegistroCliente extends javax.swing.JDialog {
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 70, 40));
 
         jLabel2.setText("Nombre");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 50, 20));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 50, 20));
 
         jLabel3.setText("Apellido");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 60, 20));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 20));
 
         jLabel4.setText("Cédula");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 60, 20));
-        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 170, -1));
-        jPanel3.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 170, -1));
-        jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 90, 170, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 60, 20));
+        jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 170, -1));
+        jPanel3.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 170, -1));
+        jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 170, -1));
 
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Sin definir" }));
-        jPanel3.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 170, -1));
+        jPanel3.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 170, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 310, 180));
 
@@ -136,6 +139,11 @@ public class RegistroCliente extends javax.swing.JDialog {
         jPanel2.add(cmdGuardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, -1));
 
         cmdEliminar.setText("Eliminar");
+        cmdEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdEliminarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 120, -1));
 
         cmdLimpiar.setText("Limpiar");
@@ -174,10 +182,9 @@ public class RegistroCliente extends javax.swing.JDialog {
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
         try {
-            long Cedula;
-            String Nombre, Apellido, Sexo;
+            String Cedula, Nombre, Apellido, Sexo;
 
-            Cedula = Long.parseLong(txtCedula.getText());
+            Cedula = txtCedula.getText();
             Nombre = txtNombre.getText();
             Apellido = txtApellido.getText();
             Sexo = (String) cmbSexo.getSelectedItem();
@@ -195,17 +202,44 @@ public class RegistroCliente extends javax.swing.JDialog {
 
     private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
         int i;
-        
+
         personas = Helper.traerDatos(ruta);
         i = tblPersonas.getSelectedRow();
         c = personas.get(i);
-        
+
         txtCedula.setText(String.valueOf(c.getCedula()));
         txtNombre.setText(c.getNombre());
         txtApellido.setText(c.getApellido());
         cmbSexo.setSelectedItem(c.getSexo());
-        
+
     }//GEN-LAST:event_tblPersonasMouseClicked
+
+    private void cmdEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdEliminarActionPerformed
+        int i, op;
+
+        op = JOptionPane.showConfirmDialog(this, "¿Seguro que desea eliminar?", "Eliminar", JOptionPane.YES_NO_OPTION);
+
+        if (op == JOptionPane.YES_OPTION) {
+
+            try {
+                i = tblPersonas.getSelectedRow();
+                personas.remove(i);
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                Helper.volcadoClientes(salida, personas);
+                Helper.llenadoTablaClientes(tblPersonas, ruta);
+                txtNombre.setText("");
+                txtCedula.setText("");
+                txtApellido.setText("");
+                txtCedula.requestFocusInWindow();
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ListadoClientes.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (IOException ex) {
+                Logger.getLogger(ListadoClientes.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+
+    }//GEN-LAST:event_cmdEliminarActionPerformed
 
     /**
      * @param args the command line arguments

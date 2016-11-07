@@ -6,7 +6,9 @@
 package clases;
 
 //import interfaz.Agregar;
+import interfaz.ListadoClientes;
 import interfaz.NuevoProducto;
+import interfaz.RegistroCliente;
 import java.awt.Component;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -100,195 +102,240 @@ public class Helper {
         }
         return m;
     }
-    
-    public static void llenadoTabla(JTable tabla, String ruta){
+
+    public static void llenadoTabla(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
         ArrayList<Producto> productos = traerDatos(ruta);
-        tm = (DefaultTableModel)tabla.getModel();
+        tm = (DefaultTableModel) tabla.getModel();
         nf = productos.size();
         tm.setRowCount(nf);
         limpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
-           tm.setValueAt(i+1, i, 0);
-           tm.setValueAt(productos.get(i).getNombre(), i, 1);
-           tm.setValueAt(productos.get(i).getTipo(), i, 2);
-           tm.setValueAt(productos.get(i).getMarca(), i, 3);
-           tm.setValueAt(productos.get(i).getUnidades(), i, 4);
-           tm.setValueAt(productos.get(i).getGarantia(), i, 5);
-           tm.setValueAt(productos.get(i).getGenero(), i, 6);
-           tm.setValueAt(productos.get(i).getClasificacion(), i, 7);
-           tm.setValueAt(productos.get(i).getPrecio(), i, 8);
-           
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(productos.get(i).getNombre(), i, 1);
+            tm.setValueAt(productos.get(i).getTipo(), i, 2);
+            tm.setValueAt(productos.get(i).getMarca(), i, 3);
+            tm.setValueAt(productos.get(i).getUnidades(), i, 4);
+            tm.setValueAt(productos.get(i).getGarantia(), i, 5);
+            tm.setValueAt(productos.get(i).getGenero(), i, 6);
+            tm.setValueAt(productos.get(i).getClasificacion(), i, 7);
+            tm.setValueAt(productos.get(i).getPrecio(), i, 8);
+
         }
-        
+
     }
-    public static void llenadoTabla(JTable tabla, ArrayList<Producto> productos){
+
+    public static void llenadoTabla(JTable tabla, ArrayList<Producto> productos) {
         int nf;
         DefaultTableModel tm;
-        tm = (DefaultTableModel)tabla.getModel();
+        tm = (DefaultTableModel) tabla.getModel();
         nf = productos.size();
         tm.setRowCount(nf);
         limpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
-           tm.setValueAt(i+1, i, 0);
-           tm.setValueAt(productos.get(i).getNombre(), i, 1);
-           tm.setValueAt(productos.get(i).getTipo(), i, 2);
-           tm.setValueAt(productos.get(i).getMarca(), i, 3);
-           tm.setValueAt(productos.get(i).getUnidades(), i, 4);
-           tm.setValueAt(productos.get(i).getGarantia(), i, 5);
-           tm.setValueAt(productos.get(i).getGenero(), i, 6);
-           tm.setValueAt(productos.get(i).getClasificacion(), i, 7);
-           tm.setValueAt(productos.get(i).getPrecio(), i, 8);
-           
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(productos.get(i).getNombre(), i, 1);
+            tm.setValueAt(productos.get(i).getTipo(), i, 2);
+            tm.setValueAt(productos.get(i).getMarca(), i, 3);
+            tm.setValueAt(productos.get(i).getUnidades(), i, 4);
+            tm.setValueAt(productos.get(i).getGarantia(), i, 5);
+            tm.setValueAt(productos.get(i).getGenero(), i, 6);
+            tm.setValueAt(productos.get(i).getClasificacion(), i, 7);
+            tm.setValueAt(productos.get(i).getPrecio(), i, 8);
+
         }
-        
+
     }
-    
-    public static void llenadoTablaClientes(JTable tabla, String ruta){
+
+    public static void llenadoTablaClientes(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
         ArrayList<Persona> personas = traerDatos(ruta);
-        tm = (DefaultTableModel)tabla.getModel();
+        tm = (DefaultTableModel) tabla.getModel();
         nf = personas.size();
         tm.setRowCount(nf);
         limpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
-           tm.setValueAt(i+1, i, 0);
-           tm.setValueAt(personas.get(i).getCedula(), i, 1);
-           tm.setValueAt(personas.get(i).getNombre(), i, 2);
-           tm.setValueAt(personas.get(i).getApellido(), i, 3);
-           tm.setValueAt(personas.get(i).getSexo(), i, 4);
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(personas.get(i).getCedula(), i, 1);
+            tm.setValueAt(personas.get(i).getNombre(), i, 2);
+            tm.setValueAt(personas.get(i).getApellido(), i, 3);
+            tm.setValueAt(personas.get(i).getSexo(), i, 4);
         }
-        
+
     }
-    
-    public static ArrayList traerDatos(String ruta){
+
+    public static void llenadoTablaClientes(JTable tabla, ArrayList<Persona> personas) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = personas.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(personas.get(i).getCedula(), i, 1);
+            tm.setValueAt(personas.get(i).getNombre(), i, 2);
+            tm.setValueAt(personas.get(i).getApellido(), i, 3);
+            tm.setValueAt(personas.get(i).getSexo(), i, 4);
+        }
+
+    }
+
+    public static ArrayList traerDatos(String ruta) {
         FileInputStream archivo;
-            ObjectInputStream entrada;
-            ArrayList productos = new ArrayList();
-            Object p;
+        ObjectInputStream entrada;
+        ArrayList productos = new ArrayList();
+        Object p;
         try {
             archivo = new FileInputStream(ruta);
             entrada = new ObjectInputStream(archivo);
-            while((p=entrada.readObject())!=null){
+            while ((p = entrada.readObject()) != null) {
                 productos.add(p);
             }
-            
+
         } catch (FileNotFoundException ex) {
-            System.out.println(ex.getMessage());        
+            System.out.println(ex.getMessage());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(Helper.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-       return productos;
+
+        return productos;
 
     }
-    public static void volcado(ObjectOutputStream salida, ArrayList productos){
+
+    public static void volcado(ObjectOutputStream salida, ArrayList productos) {
         for (int i = 0; i < productos.size(); i++) {
             try {
                 salida.writeObject(productos.get(i));
             } catch (IOException ex) {
                 Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
         }
     }
-    
-    public static void radioButtons(String genero, String ruta, JTable tabla, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
+    public static void volcadoClientes(ObjectOutputStream salida, ArrayList personas) {
+        for (int i = 0; i < personas.size(); i++) {
+            try {
+                salida.writeObject(personas.get(i));
+            } catch (IOException ex) {
+                Logger.getLogger(RegistroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+        }
+    }
+
+    public static void radioButtons(String genero, String ruta, JTable tabla, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3) {
         int i;
         Producto p;
-        
+
         ArrayList<Producto> productos = Helper.traerDatos(ruta);
         i = tabla.getSelectedRow();
         p = productos.get(i);
-        
+
         genero = p.getGenero();
-        
-        if(genero.equalsIgnoreCase("Masculino")){
+
+        if (genero.equalsIgnoreCase("Masculino")) {
             radiob2.setSelected(true);
         }
-        if(genero.equalsIgnoreCase("Femenino")){
+        if (genero.equalsIgnoreCase("Femenino")) {
             radiob3.setSelected(true);
         }
-        if(genero.equalsIgnoreCase("Unisex")){
+        if (genero.equalsIgnoreCase("Unisex")) {
             radiob.setSelected(true);
         }
     }
-    public static void checkBoxes(String clasificacion, String ruta, JTable tabla, JCheckBox Check, JCheckBox Check2){
+
+    public static void checkBoxes(String clasificacion, String ruta, JTable tabla, JCheckBox Check, JCheckBox Check2) {
         int i;
         Producto p;
-        
+
         ArrayList<Producto> productos = Helper.traerDatos(ruta);
         i = tabla.getSelectedRow();
         p = productos.get(i);
-        
+
         clasificacion = p.getClasificacion();
-        
-        if(clasificacion.equalsIgnoreCase("De Consumo")){
+
+        if (clasificacion.equalsIgnoreCase("De Consumo")) {
             Check.setSelected(true);
             Check2.setSelected(false);
         }
-        if(clasificacion.equalsIgnoreCase("De Negocio")){
+        if (clasificacion.equalsIgnoreCase("De Negocio")) {
             Check2.setSelected(true);
             Check.setSelected(false);
         }
-        if(clasificacion.equalsIgnoreCase("De Consumo y De Negocio")){
+        if (clasificacion.equalsIgnoreCase("De Consumo y De Negocio")) {
             Check.setSelected(true);
             Check2.setSelected(true);
         }
     }
-    public static String getGenero(String genero, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
-        
-        if(radiob.isSelected()){
-           genero = radiob.getText();
+
+    public static String getGenero(String genero, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3) {
+
+        if (radiob.isSelected()) {
+            genero = radiob.getText();
         }
-        if(radiob2.isSelected()){
-             genero = radiob2.getText();
+        if (radiob2.isSelected()) {
+            genero = radiob2.getText();
         }
-        if(radiob3.isSelected()){
+        if (radiob3.isSelected()) {
             genero = radiob3.getText();
         }
         return genero;
     }
-    public static String getClasificacion(String clasificacion, JCheckBox Check, JCheckBox Check2){
-        
-        if(Check.isSelected()){
-           clasificacion = Check.getText();
+
+    public static String getClasificacion(String clasificacion, JCheckBox Check, JCheckBox Check2) {
+
+        if (Check.isSelected()) {
+            clasificacion = Check.getText();
         }
-        if(Check2.isSelected()){
-             clasificacion = Check2.getText();
+        if (Check2.isSelected()) {
+            clasificacion = Check2.getText();
         }
-        if (Check.isSelected() && Check2.isSelected()){
-        clasificacion = Check.getText() + " y " + Check2.getText();
+        if (Check.isSelected() && Check2.isSelected()) {
+            clasificacion = Check.getText() + " y " + Check2.getText();
         }
         return clasificacion;
     }
-    public static void mercancia(JTable tabla, String ruta, String tipo, String marca, String garantia, String genero, String clasificacion){
+
+    public static void mercancia(JTable tabla, String ruta, String tipo, String marca, String garantia, String genero, String clasificacion) {
         ArrayList<Producto> productos = traerDatos(ruta);
         ArrayList<Producto> productosFiltro = new ArrayList();
-        
+
         for (int i = 0; i < productos.size(); i++) {
-            
-            if(productos.get(i).getTipo().equalsIgnoreCase(tipo)){
+
+            if (productos.get(i).getTipo().equalsIgnoreCase(tipo)) {
                 productosFiltro.add(productos.get(i));
             }
-            if(productos.get(i).getMarca().equals(marca)){
+            if (productos.get(i).getMarca().equals(marca)) {
                 productosFiltro.add(productos.get(i));
             }
-            if(productos.get(i).getGarantia().equals(garantia)){
+            if (productos.get(i).getGarantia().equals(garantia)) {
                 productosFiltro.add(productos.get(i));
             }
-            if(productos.get(i).getGenero().equals(genero)){
+            if (productos.get(i).getGenero().equals(genero)) {
                 productosFiltro.add(productos.get(i));
             }
-            if(productos.get(i).getClasificacion().equals(clasificacion)){
+            if (productos.get(i).getClasificacion().equals(clasificacion)) {
                 productosFiltro.add(productos.get(i));
             }
         }
         llenadoTabla(tabla, productosFiltro);
     }
 
+    public static void ListadoClientes(JTable tabla, String ruta, String cedula) {
+        ArrayList<Persona> personas = traerDatos(ruta);
+        ArrayList<Persona> productosFiltro = new ArrayList();
+        for (int i = 0; i < personas.size(); i++) {
+            if (personas.get(i).getCedula().equals(cedula)) {
+                productosFiltro.add(personas.get(i));
+            }
+
+        }
+
+        llenadoTablaClientes(tabla, productosFiltro);
+    }
 }

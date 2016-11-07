@@ -39,7 +39,7 @@ public class Principal extends javax.swing.JFrame {
         mnNuevoCliente = new javax.swing.JMenuItem();
         mnNuevoProducto = new javax.swing.JMenuItem();
         jMenu4 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        mnAgregarCompra = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         mnSalir = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
@@ -92,8 +92,14 @@ public class Principal extends javax.swing.JFrame {
         jMenu4.setText("Compras");
         jMenu4.setFont(new java.awt.Font("Consolas", 1, 14)); // NOI18N
 
-        jMenuItem2.setText("Agregar Compra");
-        jMenu4.add(jMenuItem2);
+        mnAgregarCompra.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
+        mnAgregarCompra.setText("Agregar Compra");
+        mnAgregarCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnAgregarCompraActionPerformed(evt);
+            }
+        });
+        jMenu4.add(mnAgregarCompra);
 
         jMenu1.add(jMenu4);
         jMenu1.add(jSeparator2);
@@ -142,29 +148,34 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void mnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoProductoActionPerformed
-        NuevoProducto n = new NuevoProducto(this, true);
-        n.setVisible(true);
-    }//GEN-LAST:event_mnNuevoProductoActionPerformed
+    private void mnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnClientesActionPerformed
+        ListadoClientes lc = new ListadoClientes(this, true);
+        lc.setVisible(true);
+    }//GEN-LAST:event_mnClientesActionPerformed
 
     private void mnMercanciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnMercanciaActionPerformed
         ListadoMercancia m = new ListadoMercancia(this, true);
         m.setVisible(true);
     }//GEN-LAST:event_mnMercanciaActionPerformed
 
+    private void mnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_mnSalirActionPerformed
+
+    private void mnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoProductoActionPerformed
+        NuevoProducto n = new NuevoProducto(this, true);
+        n.setVisible(true);
+    }//GEN-LAST:event_mnNuevoProductoActionPerformed
+
     private void mnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoClienteActionPerformed
         RegistroCliente r = new RegistroCliente(this, true);
         r.setVisible(true);
     }//GEN-LAST:event_mnNuevoClienteActionPerformed
 
-    private void mnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnSalirActionPerformed
-        System.exit(0);
-    }//GEN-LAST:event_mnSalirActionPerformed
-
-    private void mnClientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnClientesActionPerformed
-        //ListadoClientes l = new ListadoClientes(this, true);
-        //l.setVisible(true);
-    }//GEN-LAST:event_mnClientesActionPerformed
+    private void mnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgregarCompraActionPerformed
+        Compra C = new Compra(this,true);
+        C.setVisible(true);
+    }//GEN-LAST:event_mnAgregarCompraActionPerformed
 
     /**
      * @param args the command line arguments
@@ -209,9 +220,9 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JMenuItem mnAgregarCompra;
     private javax.swing.JMenuItem mnClientes;
     private javax.swing.JMenuItem mnFacturas;
     private javax.swing.JMenuItem mnMercancia;

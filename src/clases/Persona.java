@@ -14,23 +14,23 @@ import java.io.ObjectOutputStream;
  */
 public class Persona implements java.io.Serializable {
 
-    private long cedula;
+    private String cedula;
     private String nombre;
     private String apellido;
     private String sexo;
 
-    public Persona(long cedula, String nombre, String apellido, String sexo) {
+    public Persona(String cedula, String nombre, String apellido, String sexo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.apellido = apellido;
         this.sexo = sexo;
     }
 
-    public long getCedula() {
+    public String getCedula() {
         return cedula;
     }
 
-    public void setCedula(long cedula) {
+    public void setCedula(String cedula) {
         this.cedula = cedula;
     }
 
