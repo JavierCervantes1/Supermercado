@@ -23,8 +23,6 @@ public class Producto implements java.io.Serializable {
     private int unidades;
     private double precio;
 
-   
-    
     public Producto(String nombre, String tipo, String marca, String garantia, String genero, String clasificacion, int unidades, double precio) {
         this.nombre = nombre;
         this.tipo = tipo;
@@ -37,13 +35,14 @@ public class Producto implements java.io.Serializable {
         this.nombre = nombre;
     }
 
-     public String getNombre() {
+    public String getNombre() {
         return nombre;
     }
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
+
 
     public String getTipo() {
         return tipo;
@@ -101,7 +100,7 @@ public class Producto implements java.io.Serializable {
         this.precio = precio;
     }
 
-      public void guardar(ObjectOutputStream salida) throws IOException {
+    public void guardar(ObjectOutputStream salida) throws IOException {
         salida.writeObject(this);
     }
     /*public String Genero(String Genero, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
@@ -117,6 +116,5 @@ public class Producto implements java.io.Serializable {
         }
         return Genero;
     }*/
-
 
 }

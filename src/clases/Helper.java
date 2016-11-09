@@ -147,6 +147,43 @@ public class Helper {
         }
 
     }
+    
+    public static void llenadoProductos(JTable tabla, ArrayList<Producto> productos) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = productos.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(productos.get(i).getNombre(), i, 1);
+            tm.setValueAt(productos.get(i).getMarca(), i, 3);
+            tm.setValueAt(productos.get(i).getUnidades(), i, 4);
+            tm.setValueAt(productos.get(i).getGarantia(), i, 5);
+            tm.setValueAt(productos.get(i).getPrecio(), i, 6);
+        }
+
+    }
+
+     public static void llenadoProductos(JTable tabla, String ruta) {
+        int nf;
+        DefaultTableModel tm;
+        ArrayList<Producto> productos = traerDatos(ruta);
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = productos.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(productos.get(i).getNombre(), i, 1);
+            tm.setValueAt(productos.get(i).getMarca(), i, 3);
+            tm.setValueAt(productos.get(i).getUnidades(), i, 4);
+            tm.setValueAt(productos.get(i).getGarantia(), i, 5);
+            tm.setValueAt(productos.get(i).getPrecio(), i, 6);
+        }
+
+    }
 
     public static void llenadoTablaClientes(JTable tabla, String ruta) {
         int nf;
@@ -217,6 +254,7 @@ public class Helper {
 
         }
     }
+
     public static void volcadoClientes(ObjectOutputStream salida, ArrayList personas) {
         for (int i = 0; i < personas.size(); i++) {
             try {
@@ -306,7 +344,7 @@ public class Helper {
         ArrayList<Producto> productosFiltro = new ArrayList();
 
         for (int i = 0; i < productos.size(); i++) {
-
+       
             if (productos.get(i).getTipo().equalsIgnoreCase(tipo)) {
                 productosFiltro.add(productos.get(i));
             }
@@ -328,14 +366,29 @@ public class Helper {
 
     public static void ListadoClientes(JTable tabla, String ruta, String cedula) {
         ArrayList<Persona> personas = traerDatos(ruta);
-        ArrayList<Persona> productosFiltro = new ArrayList();
+        ArrayList<Persona> personasFiltro = new ArrayList();
         for (int i = 0; i < personas.size(); i++) {
             if (personas.get(i).getCedula().equals(cedula)) {
-                productosFiltro.add(personas.get(i));
+                personasFiltro.add(personas.get(i));
             }
 
         }
 
-        llenadoTablaClientes(tabla, productosFiltro);
+        llenadoTablaClientes(tabla, personasFiltro);
     }
+
+    public static void mercancia1(JTable tabla, String ruta, String nombre) {
+        ArrayList<Producto> productos = traerDatos(ruta);
+        ArrayList<Producto> productoFiltro = new ArrayList();
+        for (int i = 0; i < productos.size(); i++) {
+            if (productos.get(i).getNombre().equals(nombre)) {
+                productoFiltro.add(productos.get(i));
+            }
+        }
+
+        llenadoProductos(tabla, productoFiltro);
+    }
+
+     
+     
 }

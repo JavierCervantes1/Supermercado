@@ -5,6 +5,8 @@
  */
 package interfaz;
 
+import clases.Helper;
+
 /**
  *
  * @author Jcervant23
@@ -14,9 +16,13 @@ public class Compra extends javax.swing.JDialog {
     /**
      * Creates new form Compra
      */
+    String ruta;
+
     public Compra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+
         initComponents();
+        ruta = "src/datos/personas.txt";
     }
 
     /**
@@ -34,10 +40,10 @@ public class Compra extends javax.swing.JDialog {
         txtCedula = new javax.swing.JTextField();
         cmdBuscarCliente = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblCliente1 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tblProductos1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
         txtNombreProducto = new javax.swing.JTextField();
         cmdBuscarProducto = new javax.swing.JButton();
@@ -63,9 +69,14 @@ public class Compra extends javax.swing.JDialog {
         jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 150, -1));
 
         cmdBuscarCliente.setText("Buscar Cliente");
+        cmdBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarClienteActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, -1));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblCliente1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -81,7 +92,7 @@ public class Compra extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblCliente1);
 
         jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 60));
 
@@ -90,7 +101,7 @@ public class Compra extends javax.swing.JDialog {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tblProductos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,7 +117,7 @@ public class Compra extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tblProductos1);
 
         jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 90));
 
@@ -115,6 +126,11 @@ public class Compra extends javax.swing.JDialog {
         jPanel3.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
 
         cmdBuscarProducto.setText("Buscar Producto");
+        cmdBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarProductoActionPerformed(evt);
+            }
+        });
         jPanel3.add(cmdBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 540, 170));
@@ -172,6 +188,18 @@ public class Compra extends javax.swing.JDialog {
 
         setVisible(false);
     }//GEN-LAST:event_cmdSalirActionPerformed
+
+    private void cmdBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarClienteActionPerformed
+      
+        String cedula = txtCedula.getText();
+        Helper.ListadoClientes(tblCliente1, ruta, cedula);
+    }//GEN-LAST:event_cmdBuscarClienteActionPerformed
+
+    private void cmdBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarProductoActionPerformed
+        
+        String Nombre = txtNombreProducto.getText();
+        Helper.mercancia1(tblProductos1, ruta, Nombre);
+    }//GEN-LAST:event_cmdBuscarProductoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -232,8 +260,8 @@ public class Compra extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
+    private javax.swing.JTable tblCliente1;
+    private javax.swing.JTable tblProductos1;
     private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtNombreProducto;
