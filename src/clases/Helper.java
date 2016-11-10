@@ -158,10 +158,10 @@ public class Helper {
         for (int i = 0; i < nf; i++) {
             tm.setValueAt(i + 1, i, 0);
             tm.setValueAt(productos.get(i).getNombre(), i, 1);
-            tm.setValueAt(productos.get(i).getMarca(), i, 3);
-            tm.setValueAt(productos.get(i).getUnidades(), i, 4);
-            tm.setValueAt(productos.get(i).getGarantia(), i, 5);
-            tm.setValueAt(productos.get(i).getPrecio(), i, 6);
+            tm.setValueAt(productos.get(i).getMarca(), i, 2);
+            tm.setValueAt(productos.get(i).getUnidades(), i, 3);
+            tm.setValueAt(productos.get(i).getGarantia(), i, 4);
+            tm.setValueAt(productos.get(i).getPrecio(), i, 5);
         }
 
     }

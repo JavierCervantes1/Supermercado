@@ -147,6 +147,11 @@ public class RegistroCliente extends javax.swing.JDialog {
         jPanel2.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 120, -1));
 
         cmdLimpiar.setText("Limpiar");
+        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLimpiarActionPerformed(evt);
+            }
+        });
         jPanel2.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, -1));
 
         cmdSalir.setText("Salir");
@@ -240,6 +245,13 @@ public class RegistroCliente extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_cmdEliminarActionPerformed
+
+    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+        txtCedula.setText("");
+        txtNombre.setText("");
+        txtApellido.setText("");
+        cmbSexo.requestFocusInWindow();
+    }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     /**
      * @param args the command line arguments

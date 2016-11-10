@@ -16,13 +16,14 @@ public class Compra extends javax.swing.JDialog {
     /**
      * Creates new form Compra
      */
-    String ruta;
+    String rutaP, rutaC;
 
     public Compra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
-        ruta = "src/datos/personas.txt";
+        rutaP = "src/datos/personas.txt";
+        rutaC = "src/datos/productos.txt";
     }
 
     /**
@@ -192,13 +193,13 @@ public class Compra extends javax.swing.JDialog {
     private void cmdBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarClienteActionPerformed
       
         String cedula = txtCedula.getText();
-        Helper.ListadoClientes(tblCliente1, ruta, cedula);
+        Helper.ListadoClientes(tblCliente1, rutaP, cedula);
     }//GEN-LAST:event_cmdBuscarClienteActionPerformed
 
     private void cmdBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarProductoActionPerformed
         
         String Nombre = txtNombreProducto.getText();
-        Helper.mercancia1(tblProductos1, ruta, Nombre);
+        Helper.mercancia1(tblProductos1, rutaC, Nombre);
     }//GEN-LAST:event_cmdBuscarProductoActionPerformed
 
     /**

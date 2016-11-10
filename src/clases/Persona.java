@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
  * @author user
  */
 public class Persona implements java.io.Serializable {
-
+    
     private String cedula;
     private String nombre;
     private String apellido;
