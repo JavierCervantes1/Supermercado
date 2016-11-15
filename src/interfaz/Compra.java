@@ -6,6 +6,14 @@
 package interfaz;
 
 import clases.Helper;
+import clases.*;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -13,17 +21,39 @@ import clases.Helper;
  */
 public class Compra extends javax.swing.JDialog {
 
-    /**
-     * Creates new form Compra
-     */
-    String rutaP, rutaC;
+    double Unitario;
+    Persona p;
+    Producto c;
+    String rutaP, rutaClie, rutaV;
+    ObjectOutputStream salida;
+    ArrayList<Compra> compras;
 
     public Compra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
 
         initComponents();
+        try {
         rutaP = "src/datos/personas.txt";
-        rutaC = "src/datos/productos.txt";
+        rutaClie = "src/datos/productos.txt";
+        rutaV = "src/datos/compra.txt";
+        compras = Helper.traerDatos(rutaV);
+        
+        Helper.llenarComboPersonas(cmbClientes, rutaP);
+        //Helper.llenarComboProductos(cmbProductos, rutaClie);
+        
+            salida = new ObjectOutputStream(new FileOutputStream(rutaV));
+            Helper.volcado(salida, compras);
+            Helper.limpiarTabla(tblCompra);
+            Helper.llenadoTablaCompra(tblCompra, rutaV);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+        
+        
+        
     }
 
     /**
@@ -37,24 +67,24 @@ public class Compra extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
-        txtCedula = new javax.swing.JTextField();
         cmdBuscarCliente = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tblCliente1 = new javax.swing.JTable();
+        cmbClientes = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
+        cmdBuscarProducto = new javax.swing.JButton();
+        txtNombreProducto = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         tblProductos1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        txtNombreProducto = new javax.swing.JTextField();
-        cmdBuscarProducto = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         txtUnidades = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        cmdCalcularCosto = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         txtCosto = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblCompra = new javax.swing.JTable();
+        cmdRegistroCompra = new javax.swing.JButton();
         cmdCancelar = new javax.swing.JButton();
         cmdSalir = new javax.swing.JButton();
 
@@ -65,49 +95,39 @@ public class Compra extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Comprador"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setText("Cédula");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 60, 30));
-        jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, 150, -1));
-
         cmdBuscarCliente.setText("Buscar Cliente");
         cmdBuscarCliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdBuscarClienteActionPerformed(evt);
             }
         });
-        jPanel2.add(cmdBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, -1));
+        jPanel2.add(cmdBuscarCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
 
-        tblCliente1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+        jPanel2.add(cmbClientes, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 350, -1));
 
-            },
-            new String [] {
-                "No.", "Cédula", "Nombre", "Apellido", "Sexo"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
-            };
+        jLabel1.setText("Seleccionar Persona: ");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 130, 20));
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        jScrollPane1.setViewportView(tblCliente1);
-
-        jPanel2.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 60));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 540, 140));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 680, 70));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Producto"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        cmdBuscarProducto.setText("Buscar Producto");
+        cmdBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBuscarProductoActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cmdBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
+        jPanel3.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 190, -1));
 
         tblProductos1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "No.", "Producto", "Marca", "Unidades", "Garantía", "Valor Unitario"
+                "No.", "Nombre", "Marca", "Unidades", "Garantia", "Valor Unitario"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -120,21 +140,12 @@ public class Compra extends javax.swing.JDialog {
         });
         jScrollPane2.setViewportView(tblProductos1);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 500, 90));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 640, 80));
 
-        jLabel2.setText("Nombre del Producto");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 120, 20));
-        jPanel3.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
+        jLabel2.setText("Nombre Producto");
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 100, 20));
 
-        cmdBuscarProducto.setText("Buscar Producto");
-        cmdBuscarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBuscarProductoActionPerformed(evt);
-            }
-        });
-        jPanel3.add(cmdBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 130, -1));
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 180, 540, 170));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 110, 680, 150));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Compra"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -143,22 +154,47 @@ public class Compra extends javax.swing.JDialog {
         jPanel4.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 130, 20));
         jPanel4.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 130, -1));
 
-        jButton1.setText("CalcularCosto");
-        jPanel4.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 20, 140, -1));
+        cmdCalcularCosto.setText("CalcularCosto");
+        cmdCalcularCosto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdCalcularCostoActionPerformed(evt);
+            }
+        });
+        jPanel4.add(cmdCalcularCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 140, -1));
 
         jLabel4.setText("Costo Total");
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, 20));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, 20));
 
         txtCosto.setEditable(false);
-        jPanel4.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 130, -1));
+        jPanel4.add(txtCosto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 130, -1));
 
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 370, 540, 100));
+        tblCompra.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
 
-        jButton2.setText("Registrar Compra");
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 480, 140, -1));
+            },
+            new String [] {
+                "No.", "Cédula", "Nombre", "Apellido", "Producto", "Garantia", "Unidades", "Costo"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tblCompra);
+
+        jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 640, 100));
+
+        cmdRegistroCompra.setText("Registrar Compra");
+        jPanel4.add(cmdRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 140, -1));
+
+        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 680, 200));
 
         cmdCancelar.setText("Cancelar");
-        jPanel1.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 480, 130, -1));
+        jPanel1.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 480, 130, -1));
 
         cmdSalir.setText("Salir");
         cmdSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -166,13 +202,13 @@ public class Compra extends javax.swing.JDialog {
                 cmdSalirActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 480, 130, -1));
+        jPanel1.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 480, 130, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 581, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 722, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -181,7 +217,7 @@ public class Compra extends javax.swing.JDialog {
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(597, 553));
+        setSize(new java.awt.Dimension(738, 553));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -192,15 +228,28 @@ public class Compra extends javax.swing.JDialog {
 
     private void cmdBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarClienteActionPerformed
       
-        String cedula = txtCedula.getText();
-        Helper.ListadoClientes(tblCliente1, rutaP, cedula);
+       
     }//GEN-LAST:event_cmdBuscarClienteActionPerformed
 
     private void cmdBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarProductoActionPerformed
         
         String Nombre = txtNombreProducto.getText();
-        Helper.mercancia1(tblProductos1, rutaC, Nombre);
+        Helper.mercancia1(tblProductos1, rutaClie, Nombre);
+        Unitario = c.getPrecio();
+        
     }//GEN-LAST:event_cmdBuscarProductoActionPerformed
+
+    private void cmdCalcularCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularCostoActionPerformed
+        int Unidades;
+        double Operacion;
+        
+        Unidades = Integer.parseInt(txtUnidades.getText());
+        Operacion = Unitario*Unidades;
+        String res = String.valueOf(Operacion);
+        
+        txtCosto.setText(res);
+        
+    }//GEN-LAST:event_cmdCalcularCostoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -245,12 +294,13 @@ public class Compra extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cmbClientes;
     private javax.swing.JButton cmdBuscarCliente;
     private javax.swing.JButton cmdBuscarProducto;
+    private javax.swing.JButton cmdCalcularCosto;
     private javax.swing.JButton cmdCancelar;
+    private javax.swing.JButton cmdRegistroCompra;
     private javax.swing.JButton cmdSalir;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -261,9 +311,8 @@ public class Compra extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable tblCliente1;
+    private javax.swing.JTable tblCompra;
     private javax.swing.JTable tblProductos1;
-    private javax.swing.JTextField txtCedula;
     private javax.swing.JTextField txtCosto;
     private javax.swing.JTextField txtNombreProducto;
     private javax.swing.JTextField txtUnidades;

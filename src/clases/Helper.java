@@ -18,8 +18,10 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 import javax.swing.JRadioButton;
 import javax.swing.JTable;
@@ -389,6 +391,53 @@ public class Helper {
         llenadoProductos(tabla, productoFiltro);
     }
 
+     public static void llenadoTablaCompra(JTable tabla, String ruta){
+         int nf;
+        DefaultTableModel tm;
+        ArrayList<Compra> compras = traerDatos(ruta);
+        tm = (DefaultTableModel)tabla.getModel();
+        nf = compras.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+           tm.setValueAt(i+1, i, 0);
+           tm.setValueAt(compras.get(i).getCliente().getCedula(), i, 1);
+           tm.setValueAt(compras.get(i).getCliente().getNombre(), i, 2);
+           tm.setValueAt(compras.get(i).getCliente().getApellido(), i, 3);
+           tm.setValueAt(compras.get(i).getProducto().getNombre(), i, 4);
+           tm.setValueAt(compras.get(i).getProducto().getGarantia(), i, 5);
+           tm.setValueAt(compras.get(i).getUnidades(), i, 6);
+           tm.setValueAt(compras.get(i).getCosto(), i, 7);
+        }
+     }
      
-     
+     public static void llenarComboPersonas(JComboBox combo, String ruta){
+        ArrayList<Persona> personas = traerDatos(ruta);
+        DefaultComboBoxModel dcbm = (DefaultComboBoxModel) combo.getModel();
+        dcbm.removeAllElements();
+        Persona p;
+        for (int i = 0; i < personas.size(); i++) {
+            p = personas.get(i);
+            dcbm.addElement(p.getCedula()+" - "+p.getNombre()+" "+p.getApellido());
+        }
+     }
+        public static void llenarComboProductos(JComboBox combo, String ruta){
+        ArrayList<Producto> productos = traerDatos(ruta);
+        DefaultComboBoxModel dcbm = (DefaultComboBoxModel) combo.getModel();
+        dcbm.removeAllElements();
+        Producto p;
+        for (int i = 0; i < productos.size(); i++) {
+            p = productos.get(i);
+            dcbm.addElement(p.getNombre()+" - "+p.getMarca()+" - "+p.getUnidades()+" - "+p.getGarantia()+" - "+p.getPrecio());
+        }
+        }
+        public static void operacionUnidades(int Unidades, double ValorUnitario){
+            
+        
+        
+        }
+        
+    
+        
+    
 }
