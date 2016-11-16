@@ -12,14 +12,13 @@ import java.io.ObjectOutputStream;
  *
  * @author user
  */
-public class Compra implements java.io.Serializable{
-    
+public class Venta implements java.io.Serializable{
     private Producto producto;
     private Persona cliente;
     private int unidades;
     private double costo;
 
-    public Compra(Producto producto, Persona cliente, int unidades, double costo) {
+    public Venta(Producto producto, Persona cliente, int unidades, double costo) {
         this.producto = producto;
         this.cliente = cliente;
         this.unidades = unidades;
@@ -57,10 +56,9 @@ public class Compra implements java.io.Serializable{
     public void setCosto(double costo) {
         this.costo = costo;
     }
-
-    
     
     public void guardar(ObjectOutputStream salida) throws IOException{
         salida.writeObject(this);
     }
+    
 }

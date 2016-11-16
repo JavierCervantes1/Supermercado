@@ -394,7 +394,7 @@ public class Helper {
      public static void llenadoTablaCompra(JTable tabla, String ruta){
          int nf;
         DefaultTableModel tm;
-        ArrayList<Compra> compras = traerDatos(ruta);
+        ArrayList<Venta> compras = traerDatos(ruta);
         tm = (DefaultTableModel)tabla.getModel();
         nf = compras.size();
         tm.setRowCount(nf);
@@ -431,13 +431,25 @@ public class Helper {
             dcbm.addElement(p.getNombre()+" - "+p.getMarca()+" - "+p.getUnidades()+" - "+p.getGarantia()+" - "+p.getPrecio());
         }
         }
-        public static void operacionUnidades(int Unidades, double ValorUnitario){
-            
-        
-        
+        public static Producto traerProducto(String Nombre,String ruta){
+        ArrayList<Producto> productos = traerDatos(ruta);
+        for (int i = 0; i < productos.size(); i++) {
+            if(productos.get(i).getNombre().equals(Nombre)){
+                return productos.get(i);
+            }
         }
-        
-    
-        
+        return null;
+    }
+        public static Persona traerPersona(String cedula, String ruta){
+        ArrayList<Persona> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+            if(personas.get(i).getCedula().equals(cedula)){
+                return personas.get(i);
+            }
+            
+        }
+        return null;
+    }
+       
     
 }

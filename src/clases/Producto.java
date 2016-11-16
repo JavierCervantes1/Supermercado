@@ -103,18 +103,4 @@ public class Producto implements java.io.Serializable {
     public void guardar(ObjectOutputStream salida) throws IOException {
         salida.writeObject(this);
     }
-    /*public String Genero(String Genero, JRadioButton radiob, JRadioButton radiob2, JRadioButton radiob3){
-        
-        if(radiob.isSelected()){
-           radiob.getLabel();
-        }
-        if(radiob2.isSelected()){
-            radiob2.getLabel();
-        }
-        if(radiob3.isSelected()){
-            radiob3.getLabel();
-        }
-        return Genero;
-    }*/
-
 }

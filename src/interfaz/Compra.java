@@ -25,9 +25,11 @@ public class Compra extends javax.swing.JDialog {
     double Unitario;
     Persona p;
     Producto c;
-    String rutaP, rutaClie, rutaV;
+    Venta v;
+    String rutaP, rutaPro, rutaCompra;
     ObjectOutputStream salida;
     ArrayList<Compra> compras;
+    ArrayList<Producto> productos;
 
     public Compra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -35,17 +37,17 @@ public class Compra extends javax.swing.JDialog {
         initComponents();
         try {
             rutaP = "src/datos/personas.txt";
-            rutaClie = "src/datos/productos.txt";
-            rutaV = "src/datos/compra.txt";
-            compras = Helper.traerDatos(rutaV);
+            rutaPro = "src/datos/productos.txt";
+            rutaCompra = "src/datos/compra.txt";
+            compras = Helper.traerDatos(rutaCompra);
 
             Helper.llenarComboPersonas(cmbClientes, rutaP);
             //Helper.llenarComboProductos(cmbProductos, rutaClie);
 
-            salida = new ObjectOutputStream(new FileOutputStream(rutaV));
+            salida = new ObjectOutputStream(new FileOutputStream(rutaCompra));
             Helper.volcado(salida, compras);
             Helper.limpiarTabla(tblCompra);
-            Helper.llenadoTablaCompra(tblCompra, rutaV);
+            Helper.llenadoTablaCompra(tblCompra, rutaCompra);
         } catch (FileNotFoundException ex) {
             Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
@@ -121,12 +123,6 @@ public class Compra extends javax.swing.JDialog {
             }
         });
         jPanel3.add(cmdBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
-
-        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txtNombreProductoKeyTyped(evt);
-            }
-        });
         jPanel3.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 190, -1));
 
         tblProductos1.setModel(new javax.swing.table.DefaultTableModel(
@@ -196,6 +192,11 @@ public class Compra extends javax.swing.JDialog {
         jPanel4.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 640, 100));
 
         cmdRegistroCompra.setText("Registrar Compra");
+        cmdRegistroCompra.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdRegistroCompraActionPerformed(evt);
+            }
+        });
         jPanel4.add(cmdRegistroCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 140, -1));
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 270, 680, 200));
@@ -246,8 +247,8 @@ public class Compra extends javax.swing.JDialog {
     private void cmdBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarProductoActionPerformed
 
         String Nombre = txtNombreProducto.getText();
-        Helper.mercancia1(tblProductos1, rutaClie, Nombre);
-        Unitario = c.getPrecio();
+        Helper.mercancia1(tblProductos1, rutaPro, Nombre);
+        c = Helper.traerProducto(Nombre, rutaPro);
 
         JButton botonesH[] = {cmdCalcularCosto, cmdSalir};
         JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdRegistroCompra, cmdCancelar};
@@ -259,27 +260,44 @@ public class Compra extends javax.swing.JDialog {
 
     private void cmdCalcularCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularCostoActionPerformed
         int Unidades;
-        double Operacion;
-
+        
         Unidades = Integer.parseInt(txtUnidades.getText());
-        Operacion = Unitario * Unidades;
-        String res = String.valueOf(Operacion);
-
-        txtCosto.setText(res);
-
+        
+        txtCosto.setText(String.valueOf(Unidades*c.getPrecio()));
+        
         JButton botonesH[] = {cmdRegistroCompra, cmdCancelar, cmdSalir};
-        JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdCalcularCosto, cmdRegistroCompra};
+        JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdCalcularCosto};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdCalcularCostoActionPerformed
 
-    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
-        char c = evt.getKeyChar();
-        if (!Character.isAlphabetic(c)) {
-            getToolkit().beep();
-            evt.consume();
-    }//GEN-LAST:event_txtNombreProductoKeyTyped
-    }
+    private void cmdRegistroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistroCompraActionPerformed
+        try {
+        Producto producto;
+        Persona cliente;
+        String Nombre, cedula, auxCliente;
+        double Costo = Double.parseDouble(txtCosto.getText());
+        int unidad = Integer.parseInt(txtUnidades.getText());
+        int indice;
+        
+        Nombre = txtNombreProducto.getText();
+        auxCliente = cmbClientes.getSelectedItem().toString();
+        indice = auxCliente.indexOf("-") - 1;
+        cedula = auxCliente.substring(0, indice);
+        producto = Helper.traerProducto(Nombre, rutaPro);
+        cliente = Helper.traerPersona(cedula, rutaP);
+        
+        Venta v = new Venta(producto, cliente, unidad, Costo);
+        v.guardar(salida);
+        c.setUnidades((int) (unidad - c.getUnidades()));
+        Helper.llenadoTablaCompra(tblCompra, rutaCompra);
+        
+        } catch (IOException ex) {
+            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_cmdRegistroCompraActionPerformed
+    
 
     /**
      * @param args the command line arguments
