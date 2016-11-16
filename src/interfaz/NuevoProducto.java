@@ -43,6 +43,10 @@ public class NuevoProducto extends javax.swing.JDialog {
             System.out.println(ex.getMessage());
         }
 
+        JButton botonesH[] = {cmdGuardar, cmdSalir};
+        JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }
 
     /**
@@ -102,8 +106,26 @@ public class NuevoProducto extends javax.swing.JDialog {
 
         cmbTipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Accesorio", "Aseo Personal", "Belleza", "Calzado", "Comestible", "Electrodoméstico", "Joyeria", "Limpieza", "Muebleria", "Ropa", "Tecnologia", "Utencilios" }));
         jPanel1.add(cmbTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 30, 150, -1));
+
+        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProductoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 30, 160, -1));
+
+        txtUnidades.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtUnidadesKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtUnidades, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 160, -1));
+
+        txtPrecio.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPrecioKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 160, -1));
 
         jLabel6.setText("Precio");
@@ -262,28 +284,54 @@ public class NuevoProducto extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
+        if (txtNombreProducto.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Nombre De Producto", "Error", 1);
+            JButton botonesH[] = {cmdGuardar, cmdSalir};
+            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtNombreProducto.requestFocusInWindow();
+        } else if (txtUnidades.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite Las Unidades A Comprar", "Error", 1);
+            JButton botonesH[] = {cmdGuardar, cmdSalir};
+            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtUnidades.requestFocusInWindow();
+        } else if (txtPrecio.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Precio Del Producto", "Error", 1);
+            JButton botonesH[] = {cmdGuardar, cmdSalir};
+            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtPrecio.requestFocusInWindow();
+        } else {
+            try {
+                String Nombre, Tipo, Marca, Garantia, Genero = "", Clasificacion = "";
+                double Precio;
+                int Unidades;
 
-        try {
-            String Nombre, Tipo, Marca, Garantia, Genero = "", Clasificacion = "";
-            double Precio;
-            int Unidades;
+                Nombre = txtNombreProducto.getText();
+                Marca = (String) cmbMarca.getSelectedItem();
+                Garantia = (String) cmbGarantia.getSelectedItem();
+                Tipo = (String) cmbTipo.getSelectedItem();
+                Unidades = Integer.parseInt(txtUnidades.getText());
+                Precio = Double.parseDouble(txtPrecio.getText());
 
-            Nombre = txtNombreProducto.getText();
-            Marca = (String) cmbMarca.getSelectedItem();
-            Garantia = (String) cmbGarantia.getSelectedItem();
-            Tipo = (String) cmbTipo.getSelectedItem();
-            Unidades = Integer.parseInt(txtUnidades.getText());
-            Precio = Double.parseDouble(txtPrecio.getText());
+                Genero = Helper.getGenero(Genero, RbUnisex, RbMasculino, RbFemenino);
+                Clasificacion = Helper.getClasificacion(Clasificacion, CheckConsumo, CheckNegocio);
 
-            Genero = Helper.getGenero(Genero, RbUnisex, RbMasculino, RbFemenino);
-            Clasificacion = Helper.getClasificacion(Clasificacion, CheckConsumo, CheckNegocio);
+                Producto p = new Producto(Nombre, Tipo, Marca, Garantia, Genero, Clasificacion, Unidades, Precio);
 
-            Producto p = new Producto(Nombre, Tipo, Marca, Garantia, Genero, Clasificacion, Unidades, Precio);
-
-            p.guardar(salida);
-            Helper.llenadoTabla(tblProductos, ruta);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+                p.guardar(salida);
+                Helper.llenadoTabla(tblProductos, ruta);
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+            JButton botonesH[] = {cmdLimpiar, cmdSalir};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
         }
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
@@ -318,6 +366,30 @@ public class NuevoProducto extends javax.swing.JDialog {
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_cmdSalirActionPerformed
+
+    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreProductoKeyTyped
+
+    private void txtUnidadesKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtUnidadesKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtUnidadesKeyTyped
+
+    private void txtPrecioKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPrecioKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtPrecioKeyTyped
 
     /**
      * @param args the command line arguments

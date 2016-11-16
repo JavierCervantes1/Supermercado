@@ -14,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 
 /**
  *
@@ -33,14 +34,14 @@ public class Compra extends javax.swing.JDialog {
 
         initComponents();
         try {
-        rutaP = "src/datos/personas.txt";
-        rutaClie = "src/datos/productos.txt";
-        rutaV = "src/datos/compra.txt";
-        compras = Helper.traerDatos(rutaV);
-        
-        Helper.llenarComboPersonas(cmbClientes, rutaP);
-        //Helper.llenarComboProductos(cmbProductos, rutaClie);
-        
+            rutaP = "src/datos/personas.txt";
+            rutaClie = "src/datos/productos.txt";
+            rutaV = "src/datos/compra.txt";
+            compras = Helper.traerDatos(rutaV);
+
+            Helper.llenarComboPersonas(cmbClientes, rutaP);
+            //Helper.llenarComboProductos(cmbProductos, rutaClie);
+
             salida = new ObjectOutputStream(new FileOutputStream(rutaV));
             Helper.volcado(salida, compras);
             Helper.limpiarTabla(tblCompra);
@@ -50,10 +51,10 @@ public class Compra extends javax.swing.JDialog {
         } catch (IOException ex) {
             Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-        
-        
-        
+        JButton botonesH[] = {cmdBuscarCliente, cmdSalir};
+        JButton botonesD[] = {cmdBuscarProducto, cmdCalcularCosto, cmdRegistroCompra, cmdCancelar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }
 
     /**
@@ -120,6 +121,12 @@ public class Compra extends javax.swing.JDialog {
             }
         });
         jPanel3.add(cmdBuscarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 130, -1));
+
+        txtNombreProducto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreProductoKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtNombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 190, -1));
 
         tblProductos1.setModel(new javax.swing.table.DefaultTableModel(
@@ -227,29 +234,52 @@ public class Compra extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdSalirActionPerformed
 
     private void cmdBuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarClienteActionPerformed
-      
-       
+
+        JButton botonesH[] = {cmdBuscarProducto, cmdSalir};
+        JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdCancelar};
+        cmbClientes.setEnabled(false);
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+
     }//GEN-LAST:event_cmdBuscarClienteActionPerformed
 
     private void cmdBuscarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBuscarProductoActionPerformed
-        
+
         String Nombre = txtNombreProducto.getText();
         Helper.mercancia1(tblProductos1, rutaClie, Nombre);
         Unitario = c.getPrecio();
-        
+
+        JButton botonesH[] = {cmdCalcularCosto, cmdSalir};
+        JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdRegistroCompra, cmdCancelar};
+        cmbClientes.setEnabled(false);
+        txtNombreProducto.setEnabled(false);
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdBuscarProductoActionPerformed
 
     private void cmdCalcularCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularCostoActionPerformed
         int Unidades;
         double Operacion;
-        
+
         Unidades = Integer.parseInt(txtUnidades.getText());
-        Operacion = Unitario*Unidades;
+        Operacion = Unitario * Unidades;
         String res = String.valueOf(Operacion);
-        
+
         txtCosto.setText(res);
-        
+
+        JButton botonesH[] = {cmdRegistroCompra, cmdCancelar, cmdSalir};
+        JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdCalcularCosto, cmdRegistroCompra};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdCalcularCostoActionPerformed
+
+    private void txtNombreProductoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreProductoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+            evt.consume();
+    }//GEN-LAST:event_txtNombreProductoKeyTyped
+    }
 
     /**
      * @param args the command line arguments

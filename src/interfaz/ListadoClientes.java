@@ -6,6 +6,7 @@
 package interfaz;
 
 import clases.Helper;
+import javax.swing.JButton;
 
 /**
  *
@@ -23,6 +24,11 @@ public class ListadoClientes extends javax.swing.JDialog {
 
         initComponents();
         ruta = "src/datos/personas.txt";
+
+        JButton botonesH[] = {cmdListar};
+        JButton botonesD[] = {cmdLimpiar, cmdSalir};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }
 
     /**
@@ -53,6 +59,12 @@ public class ListadoClientes extends javax.swing.JDialog {
 
         jLabel1.setText("Cedula");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 20));
+
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyTyped(evt);
+            }
+        });
         jPanel2.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 130, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 60, 240, 90));
@@ -127,9 +139,21 @@ public class ListadoClientes extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
-        String cedula = txtCedula.getText();
-        Helper.ListadoClientes(tblClientes, ruta, cedula);
-
+        if (txtCedula.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Ingrese La Cedula, Para Ser Listado", "Error", 1);
+            JButton botonesH[] = {cmdListar};
+            JButton botonesD[] = {cmdLimpiar, cmdSalir};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtCedula.requestFocusInWindow();
+        } else {
+            String cedula = txtCedula.getText();
+            Helper.ListadoClientes(tblClientes, ruta, cedula);
+            JButton botonesH[] = {cmdLimpiar, cmdSalir};
+            JButton botonesD[] = {cmdListar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+        }
 
     }//GEN-LAST:event_cmdListarActionPerformed
 
@@ -143,6 +167,14 @@ public class ListadoClientes extends javax.swing.JDialog {
 
         txtCedula.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedulaKeyTyped
 
     /**
      * @param args the command line arguments

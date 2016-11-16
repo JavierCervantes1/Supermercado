@@ -6,10 +6,11 @@
 package interfaz;
 
 import clases.Helper;
+import javax.swing.JButton;
 
 /**
  *
- * @author Jcervant23
+ * @author Lcastane6
  */
 public class ListadoMercancia extends javax.swing.JDialog {
 
@@ -22,6 +23,10 @@ public class ListadoMercancia extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ruta = "src/datos/productos.txt";
+        JButton botonesH[] = {cmdListar};
+        JButton botonesD[] = {cmdLimpiar, cmdSalir};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }
 
     /**
@@ -69,6 +74,12 @@ public class ListadoMercancia extends javax.swing.JDialog {
 
         jLabel4.setText("Marca");
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 70, 80, 30));
+
+        txtMarca.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtMarcaKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 70, 150, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Género"));
@@ -128,6 +139,12 @@ public class ListadoMercancia extends javax.swing.JDialog {
 
         jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 130, 150));
         jPanel1.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 150, -1));
+
+        txtTipo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtTipoKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 30, 150, -1));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 270));
@@ -157,41 +174,71 @@ public class ListadoMercancia extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
-        String tipo = txtTipo.getText();
-        String marca = txtMarca.getText();
-        String garantia = txtGarantia.getText();
-        String genero = "", clasificacion = "";
+        if (txtTipo.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Tipo De Producto", "Error", 1);
+            JButton botonesH[] = {cmdListar};
+            JButton botonesD[] = {cmdLimpiar, cmdSalir};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtTipo.requestFocusInWindow();
+        } else if (txtMarca.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite La Marca Del Producto", "Error", 1);
+            JButton botonesH[] = {cmdListar};
+            JButton botonesD[] = {cmdLimpiar, cmdSalir};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtMarca.requestFocusInWindow();
+        } else if (txtGarantia.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite La Garantia Del Producto", "Error", 1);
+            JButton botonesH[] = {cmdListar};
+            JButton botonesD[] = {cmdLimpiar, cmdSalir};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtGarantia.requestFocusInWindow();
+        } else {
+            String tipo = txtTipo.getText();
+            String marca = txtMarca.getText();
+            String garantia = txtGarantia.getText();
+            String genero = "", clasificacion = "";
 
-        if (RbUnisex.isSelected()) {
-            genero = RbUnisex.getLabel();
-        }
-        if (RbMasculino.isSelected()) {
-            genero = RbMasculino.getLabel();
-        }
-        if (RbFemenino.isSelected()) {
-            genero = RbFemenino.getLabel();
-        }
+            if (RbUnisex.isSelected()) {
+                genero = RbUnisex.getLabel();
+            }
+            if (RbMasculino.isSelected()) {
+                genero = RbMasculino.getLabel();
+            }
+            if (RbFemenino.isSelected()) {
+                genero = RbFemenino.getLabel();
+            }
 
-        if (CheckConsumo.isSelected()) {
-            clasificacion = CheckConsumo.getLabel();
-        }
-        if (CheckNegocio.isSelected()) {
-            clasificacion = CheckNegocio.getLabel();
-        }
-        if (CheckConsumo.isSelected() && CheckNegocio.isSelected()) {
-            clasificacion = CheckConsumo.getLabel() + " y " + CheckNegocio.getLabel();
-        }
+            if (CheckConsumo.isSelected()) {
+                clasificacion = CheckConsumo.getLabel();
+            }
+            if (CheckNegocio.isSelected()) {
+                clasificacion = CheckNegocio.getLabel();
+            }
+            if (CheckConsumo.isSelected() && CheckNegocio.isSelected()) {
+                clasificacion = CheckConsumo.getLabel() + " y " + CheckNegocio.getLabel();
+            }
 
-        Helper.mercancia(tblProductos, ruta, tipo, marca, garantia, genero, clasificacion);
+            Helper.mercancia(tblProductos, ruta, tipo, marca, garantia, genero, clasificacion);
 
-        txtMarca.setText("");
-        txtGarantia.setText("");
-        txtTipo.setText("");
-        CheckConsumo.setSelected(false);
-        CheckNegocio.setSelected(false);
-        GRbGenero.clearSelection();
-        txtTipo.requestFocusInWindow();
+            txtMarca.setText("");
+            txtGarantia.setText("");
+            txtTipo.setText("");
+            CheckConsumo.setSelected(false);
+            CheckNegocio.setSelected(false);
+            GRbGenero.clearSelection();
+            txtTipo.requestFocusInWindow();
 
+            JButton botonesH[] = {cmdLimpiar, cmdSalir};
+            JButton botonesD[] = {cmdListar};
+            txtTipo.setEnabled(false);
+            txtMarca.setEnabled(false);
+            txtGarantia.setEnabled(false);
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+        }
     }//GEN-LAST:event_cmdListarActionPerformed
 
     private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
@@ -201,12 +248,35 @@ public class ListadoMercancia extends javax.swing.JDialog {
         GRbGenero.clearSelection();
         CheckConsumo.setSelected(false);
         CheckNegocio.setSelected(false);
+        txtTipo.setEnabled(true);
+        txtMarca.setEnabled(true);
+        txtGarantia.setEnabled(true);
         txtTipo.requestFocusInWindow();
+        JButton botonesH[] = {cmdListar, cmdSalir};
+        JButton botonesD[] = {cmdLimpiar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdLimpiarActionPerformed
 
     private void cmdSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdSalirActionPerformed
         setVisible(false);
     }//GEN-LAST:event_cmdSalirActionPerformed
+
+    private void txtTipoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtTipoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtTipoKeyTyped
+
+    private void txtMarcaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtMarcaKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtMarcaKeyTyped
 
     /**
      * @param args the command line arguments

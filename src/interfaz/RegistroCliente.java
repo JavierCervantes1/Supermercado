@@ -13,7 +13,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -93,8 +92,26 @@ public class RegistroCliente extends javax.swing.JDialog {
 
         jLabel4.setText("Cédula");
         jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 60, 20));
+
+        txtNombre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtNombreKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 170, -1));
+
+        txtApellido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtApellidoKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtApellido, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 90, 170, -1));
+
+        txtCedula.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtCedulaKeyTyped(evt);
+            }
+        });
         jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 170, -1));
 
         cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Sin definir" }));
@@ -186,23 +203,32 @@ public class RegistroCliente extends javax.swing.JDialog {
     }//GEN-LAST:event_cmdSalirActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
-        try {
-            String Cedula, Nombre, Apellido, Sexo;
+        if (txtCedula.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite La Cedula Del Cliente", "Error", 1);
+            txtCedula.requestFocusInWindow();
+        } else if (txtNombre.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Nombre Del Cliente", "Error", 1);
+            txtNombre.requestFocusInWindow();
+        } else if (txtApellido.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Apellido Del Cliente", "Error", 1);
+            txtApellido.requestFocusInWindow();
+        } else {
+            try {
+                String Cedula, Nombre, Apellido, Sexo;
 
-            Cedula = txtCedula.getText();
-            Nombre = txtNombre.getText();
-            Apellido = txtApellido.getText();
-            Sexo = (String) cmbSexo.getSelectedItem();
+                Cedula = txtCedula.getText();
+                Nombre = txtNombre.getText();
+                Apellido = txtApellido.getText();
+                Sexo = (String) cmbSexo.getSelectedItem();
 
-            Persona c = new Persona(Cedula, Nombre, Apellido, Sexo);
+                Persona c = new Persona(Cedula, Nombre, Apellido, Sexo);
 
-            c.guardar(salida);
-            Helper.llenadoTablaClientes(tblPersonas, ruta);
-        } catch (IOException ex) {
-            Logger.getLogger(ex.getMessage());
+                c.guardar(salida);
+                Helper.llenadoTablaClientes(tblPersonas, ruta);
+            } catch (IOException ex) {
+                Logger.getLogger(ex.getMessage());
+            }
         }
-
-
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
     private void tblPersonasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblPersonasMouseClicked
@@ -252,6 +278,30 @@ public class RegistroCliente extends javax.swing.JDialog {
         txtApellido.setText("");
         cmbSexo.requestFocusInWindow();
     }//GEN-LAST:event_cmdLimpiarActionPerformed
+
+    private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtNombreKeyTyped
+
+    private void txtApellidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtApellidoKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isAlphabetic(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtApellidoKeyTyped
+
+    private void txtCedulaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCedulaKeyTyped
+        char c = evt.getKeyChar();
+        if (!Character.isDigit(c)) {
+            getToolkit().beep();
+            evt.consume();
+        }
+    }//GEN-LAST:event_txtCedulaKeyTyped
 
     /**
      * @param args the command line arguments
