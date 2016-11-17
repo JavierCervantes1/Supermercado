@@ -6,6 +6,8 @@
 package interfaz;
 
 import clases.*;
+import excepciones.NoCeroException;
+import excepciones.NoNegativoException;
 import java.awt.Dialog;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -330,6 +332,11 @@ public class NuevoProducto extends javax.swing.JDialog {
                 Helper.llenadoTabla(tblProductos, ruta);
             } catch (IOException ex) {
                 System.out.println(ex.getMessage());
+            } catch (NoNegativoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (NoCeroException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+                txtUnidades.requestFocusInWindow();
             }
             JButton botonesH[] = {cmdLimpiar, cmdSalir};
             JButton botonesD[] = {cmdEliminar, cmdGuardar};

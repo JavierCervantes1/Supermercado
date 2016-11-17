@@ -5,6 +5,8 @@
  */
 package clases;
 
+import excepciones.NoCeroException;
+import excepciones.NoNegativoException;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 
@@ -23,7 +25,20 @@ public class Producto implements java.io.Serializable {
     private int unidades;
     private double precio;
 
-    public Producto(String nombre, String tipo, String marca, String garantia, String genero, String clasificacion, int unidades, double precio) {
+    public Producto(String nombre, String tipo, String marca, String garantia, String genero, String clasificacion, int unidades, double precio) throws NoNegativoException, NoCeroException {
+       if (unidades < 0){
+       throw new NoNegativoException("El número de unidades no debe ser Negativo");
+       }
+       if (precio < 0){
+       throw new NoNegativoException("El precio no debe ser Negativo");
+       }
+       if (unidades == 0) {
+            throw new NoCeroException("El número de unidades no debe ser Cero");
+        }
+       if (precio == 0) {
+            throw new NoCeroException("El precio no debe ser Cero");
+        }
+        
         this.nombre = nombre;
         this.tipo = tipo;
         this.marca = marca;
@@ -88,7 +103,14 @@ public class Producto implements java.io.Serializable {
         return unidades;
     }
 
-    public void setUnidades(int unidades) {
+    public void setUnidades(int unidades) throws NoNegativoException, NoCeroException {
+        
+        if (unidades < 0){
+       throw new NoNegativoException("El número de unidades no debe ser Negativo");
+       }
+       if (unidades == 0){
+       throw new NoCeroException("El número de unidades no debe ser Cero");
+       }
         this.unidades = unidades;
     }
 
@@ -96,7 +118,13 @@ public class Producto implements java.io.Serializable {
         return precio;
     }
 
-    public void setPrecio(double precio) {
+    public void setPrecio(double precio) throws NoNegativoException, NoCeroException {
+        if (precio < 0){
+       throw new NoNegativoException("El precio no debe ser Negativo");
+       }
+       if (precio == 0) {
+            throw new NoCeroException("El precio no debe ser Cero");
+        }
         this.precio = precio;
     }
 

@@ -7,6 +7,8 @@ package interfaz;
 
 import clases.Helper;
 import clases.*;
+import excepciones.NoCeroException;
+import excepciones.NoNegativoException;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -15,13 +17,14 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Jcervant23
  */
 public class Compra extends javax.swing.JDialog {
-
+    int sw = 0;
     double Unitario;
     Persona p;
     Producto c;
@@ -260,44 +263,82 @@ public class Compra extends javax.swing.JDialog {
 
     private void cmdCalcularCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularCostoActionPerformed
         int Unidades;
-        
+
         Unidades = Integer.parseInt(txtUnidades.getText());
+        if (Unidades < 0) {
+            try {
+                throw new NoNegativoException("El número de unidades no debe ser Negativo");
+            } catch (NoNegativoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            sw = 1;
+        }
+        if (Unidades == 0) {
+            try {
+                throw new NoCeroException("El número de unidades no debe ser Cero");
+            } catch (NoCeroException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            sw = 1;
+        }
         
-        txtCosto.setText(String.valueOf(Unidades*c.getPrecio()));
-        
+        if (sw == 0){
+        txtCosto.setText(String.valueOf(Unidades * c.getPrecio()));
+
         JButton botonesH[] = {cmdRegistroCompra, cmdCancelar, cmdSalir};
         JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdCalcularCosto};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
+        }
+        if (sw == 1){
+        JButton botonesH[] = {cmdCalcularCosto, cmdCancelar, cmdSalir};
+        JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdRegistroCompra};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+        txtUnidades.requestFocusInWindow();
+        }
     }//GEN-LAST:event_cmdCalcularCostoActionPerformed
 
     private void cmdRegistroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistroCompraActionPerformed
         try {
-        Producto producto;
-        Persona cliente;
-        String Nombre, cedula, auxCliente;
-        double Costo = Double.parseDouble(txtCosto.getText());
-        int unidad = Integer.parseInt(txtUnidades.getText());
-        int indice;
-        
-        Nombre = txtNombreProducto.getText();
-        auxCliente = cmbClientes.getSelectedItem().toString();
-        indice = auxCliente.indexOf("-") - 1;
-        cedula = auxCliente.substring(0, indice);
-        producto = Helper.traerProducto(Nombre, rutaPro);
-        cliente = Helper.traerPersona(cedula, rutaP);
-        
-        Venta v = new Venta(producto, cliente, unidad, Costo);
-        v.guardar(salida);
-        c.setUnidades((int) (unidad - c.getUnidades()));
-        Helper.llenadoTablaCompra(tblCompra, rutaCompra);
-        
+            Producto producto;
+            Persona cliente;
+            String Nombre, cedula, auxCliente;
+            double Costo = Double.parseDouble(txtCosto.getText());
+            int unidad = Integer.parseInt(txtUnidades.getText());
+            int indice;
+
+            Nombre = txtNombreProducto.getText();
+            auxCliente = cmbClientes.getSelectedItem().toString();
+            indice = auxCliente.indexOf("-") - 1;
+            cedula = auxCliente.substring(0, indice);
+            producto = Helper.traerProducto(Nombre, rutaPro);
+            cliente = Helper.traerPersona(cedula, rutaP);
+
+            Venta v;
+            try {
+                v = new Venta(producto, cliente, unidad, Costo);
+                v.guardar(salida);
+            } catch (NoNegativoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (NoCeroException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            
+            try {
+                c.setUnidades((int) (unidad - c.getUnidades()));
+            } catch (NoNegativoException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (NoCeroException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            }
+            Helper.llenadoTablaCompra(tblCompra, rutaCompra);
+
         } catch (IOException ex) {
             Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+
         }
-        
     }//GEN-LAST:event_cmdRegistroCompraActionPerformed
-    
 
     /**
      * @param args the command line arguments
