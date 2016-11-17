@@ -23,8 +23,8 @@ public class ListadoMercancia extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         ruta = "src/datos/productos.txt";
-        JButton botonesH[] = {cmdListar};
-        JButton botonesD[] = {cmdLimpiar, cmdSalir};
+        JButton botonesH[] = {cmdListar, cmdSalir};
+        JButton botonesD[] = {cmdLimpiar};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
     }
@@ -136,7 +136,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Clasificación"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        CheckConsumo.setText("De consumo");
+        CheckConsumo.setText("De Consumo");
         jPanel2.add(CheckConsumo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, -1, 30));
 
         CheckNegocio.setText("De Negocio");
@@ -195,7 +195,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
 
             genero = Helper.getGenero(genero, RbUnisex, RbMasculino, RbFemenino);
             clasificacion = Helper.getClasificacion(clasificacion, CheckConsumo, CheckNegocio);
-
+            
             Helper.mercancia(tblProductos, ruta, tipo, marca, garantia, genero, clasificacion);
 
             txtMarca.setText("");

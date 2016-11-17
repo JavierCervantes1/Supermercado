@@ -245,7 +245,7 @@
               <SubComponents>
                 <Component class="javax.swing.JCheckBox" name="CheckConsumo">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="De consumo"/>
+                    <Property name="text" type="java.lang.String" value="De Consumo"/>
                   </Properties>
                   <Constraints>
                     <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

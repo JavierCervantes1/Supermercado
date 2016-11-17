@@ -410,6 +410,23 @@ public class Helper {
            tm.setValueAt(compras.get(i).getCosto(), i, 7);
         }
      }
+     public static void llenadoTablaCompra(JTable tabla, ArrayList<Venta>compras){
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel)tabla.getModel();
+        nf = compras.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+           tm.setValueAt(i+1, i, 0);
+           tm.setValueAt(compras.get(i).getProducto().getNombre(), i, 1);
+           tm.setValueAt(compras.get(i).getProducto().getMarca(), i, 2);
+           tm.setValueAt(compras.get(i).getProducto().getGarantia(), i, 3);
+           tm.setValueAt(compras.get(i).getUnidades(), i, 4);
+           tm.setValueAt(compras.get(i).getProducto().getPrecio(), i, 5);
+           tm.setValueAt(compras.get(i).getCosto(), i, 6);
+        }
+     }
      
      public static void llenarComboPersonas(JComboBox combo, String ruta){
         ArrayList<Persona> personas = traerDatos(ruta);
@@ -451,5 +468,15 @@ public class Helper {
         return null;
     }
        
-    
+    public static void Factura(JTable tabla, String ruta, String cedula) {
+        ArrayList<Venta> compras = traerDatos(ruta);
+        ArrayList<Venta> comprasFiltro = new ArrayList();
+        for (int i = 0; i < compras.size(); i++) {
+            if (compras.get(i).getCliente().getCedula().equals(cedula)) {
+                comprasFiltro.add(compras.get(i));
+            }
+        }
+
+        llenadoTablaCompra(tabla, comprasFiltro);
+    }
 }

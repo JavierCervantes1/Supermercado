@@ -45,7 +45,6 @@ public class Compra extends javax.swing.JDialog {
             compras = Helper.traerDatos(rutaCompra);
 
             Helper.llenarComboPersonas(cmbClientes, rutaP);
-            //Helper.llenarComboProductos(cmbProductos, rutaClie);
 
             salida = new ObjectOutputStream(new FileOutputStream(rutaCompra));
             Helper.volcado(salida, compras);
