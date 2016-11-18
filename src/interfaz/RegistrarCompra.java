@@ -256,8 +256,8 @@ public class RegistrarCompra extends javax.swing.JDialog {
 
         if (txtNombreProducto.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite El Nombre del Producto", "Error", 2);
-            JButton botonesH[] = {cmdBuscarProducto, cmdSalir};
-            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdReiniciar};
+            JButton botonesH[] = {cmdBuscarProducto, cmdReiniciar, cmdSalir};
+            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtNombreProducto.requestFocusInWindow();
@@ -266,8 +266,8 @@ public class RegistrarCompra extends javax.swing.JDialog {
             Helper.mercancia1(tblProductos1, rutaPro, Nombre);
             c = Helper.traerProducto(Nombre, rutaPro);
 
-            JButton botonesH[] = {cmdCalcularCosto, cmdSalir};
-            JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdRegistroCompra, cmdReiniciar};
+            JButton botonesH[] = {cmdCalcularCosto, cmdReiniciar, cmdSalir};
+            JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdRegistroCompra};
             cmbClientes.setEnabled(false);
             txtNombreProducto.setEnabled(false);
             txtUnidades.setEditable(true);
@@ -281,8 +281,8 @@ public class RegistrarCompra extends javax.swing.JDialog {
 
         if (tblProductos1.getRowCount() == 0) {
             Helper.mensaje(this, "Aun no ha ingresado el Producto", "Error", 2);
-            JButton botonesH[] = {cmdBuscarProducto, cmdSalir};
-            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdReiniciar};
+            JButton botonesH[] = {cmdBuscarProducto, cmdReiniciar, cmdSalir};
+            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtNombreProducto.setEnabled(true);
@@ -292,7 +292,7 @@ public class RegistrarCompra extends javax.swing.JDialog {
         } else if (txtUnidades.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite Las Unidades a Comprar", "Error", 2);
             JButton botonesH[] = {cmdReiniciar, cmdSalir};
-            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdReiniciar, cmdBuscarProducto};
+            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdBuscarProducto};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtUnidades.requestFocusInWindow();
