@@ -137,6 +137,9 @@
                 </Property>
                 <Property name="text" type="java.lang.String" value="Facturas"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnFacturasActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

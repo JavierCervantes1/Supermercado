@@ -30,7 +30,7 @@ public class Compra extends javax.swing.JDialog {
     Producto c;
     Venta v;
     String rutaP, rutaPro, rutaCompra;
-    ObjectOutputStream salida;
+    ObjectOutputStream salida, salida1;
     ArrayList<Compra> compras;
     ArrayList<Producto> productos;
 
@@ -306,6 +306,7 @@ public class Compra extends javax.swing.JDialog {
             double Costo = Double.parseDouble(txtCosto.getText());
             int unidad = Integer.parseInt(txtUnidades.getText());
             int indice;
+            ArrayList<Producto> unidadesActualizado;
 
             Nombre = txtNombreProducto.getText();
             auxCliente = cmbClientes.getSelectedItem().toString();
@@ -313,6 +314,10 @@ public class Compra extends javax.swing.JDialog {
             cedula = auxCliente.substring(0, indice);
             producto = Helper.traerProducto(Nombre, rutaPro);
             cliente = Helper.traerPersona(cedula, rutaP);
+            
+            unidadesActualizado = Helper.actualizarUnidades(rutaPro, Nombre, unidad);
+            salida1 = new ObjectOutputStream(new FileOutputStream(rutaPro));
+            Helper.volcado(salida1, unidadesActualizado);
 
             Venta v;
             try {
@@ -324,18 +329,15 @@ public class Compra extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             }
             
-            try {
-                c.setUnidades((int) (unidad - c.getUnidades()));
-            } catch (NoNegativoException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            } catch (NoCeroException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
             Helper.llenadoTablaCompra(tblCompra, rutaCompra);
 
         } catch (IOException ex) {
             Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
 
+        } catch (NoNegativoException ex) {
+            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NoCeroException ex) {
+            Logger.getLogger(Compra.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_cmdRegistroCompraActionPerformed
 

@@ -138,6 +138,11 @@ public class Principal extends javax.swing.JFrame {
 
         mnFacturas.setFont(new java.awt.Font("Consolas", 0, 14)); // NOI18N
         mnFacturas.setText("Facturas");
+        mnFacturas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnFacturasActionPerformed(evt);
+            }
+        });
         jMenu2.add(mnFacturas);
 
         jMenuBar1.add(jMenu2);
@@ -176,6 +181,11 @@ public class Principal extends javax.swing.JFrame {
         Compra C = new Compra(this,true);
         C.setVisible(true);
     }//GEN-LAST:event_mnAgregarCompraActionPerformed
+
+    private void mnFacturasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnFacturasActionPerformed
+        Facturacion F = new Facturacion(this,true);
+        F.setVisible(true);
+    }//GEN-LAST:event_mnFacturasActionPerformed
 
     /**
      * @param args the command line arguments

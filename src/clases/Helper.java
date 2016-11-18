@@ -6,6 +6,8 @@
 package clases;
 
 //import interfaz.Agregar;
+import excepciones.NoCeroException;
+import excepciones.NoNegativoException;
 import interfaz.ListadoClientes;
 import interfaz.NuevoProducto;
 import interfaz.RegistroCliente;
@@ -478,5 +480,65 @@ public class Helper {
         }
 
         llenadoTablaCompra(tabla, comprasFiltro);
+    }
+    public static ArrayList<Producto> actualizarUnidades(String ruta, String Nombre, int unidad) throws NoNegativoException, NoCeroException{
+        ArrayList<Producto> productos = traerDatos(ruta);
+        for (int i = 0; i < productos.size(); i++) {
+          if(productos.get(i).getNombre().equals(Nombre)){
+               productos.get(i).setUnidades(productos.get(i).getUnidades() - unidad);
+               
+                i=productos.size();
+            }
+        }
+        return productos;
+    }
+    public static boolean buscarPorCedula(String cedula, String ruta){
+        ArrayList<Persona> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+            if(personas.get(i).getCedula().equals(cedula)){
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    public static boolean buscarPorNombreProducto(String Nombre, String ruta){
+        ArrayList<Producto> productos = traerDatos(ruta);
+        for (int i = 0; i < productos.size(); i++) {
+            if(productos.get(i).getNombre().equalsIgnoreCase(Nombre)){
+                return true;
+            }
+            
+        }
+        return false;
+    }
+    public static ArrayList<Persona> actualizarPersona(String ruta, String cedula, String nombre, String apellido, String sexo){
+        ArrayList<Persona> personas = traerDatos(ruta);
+        for (int i = 0; i < personas.size(); i++) {
+          if(personas.get(i).getCedula().equals(cedula)){
+                personas.get(i).setNombre(nombre);
+                personas.get(i).setApellido(apellido);
+                personas.get(i).setSexo(sexo);
+                i=personas.size();
+            }
+        }
+        return personas;
+    }
+    public static ArrayList<Producto> actualizarProducto(String ruta, String nombre, String tipo, String marca, int Unidades, String garantia, String genero, String clasficacion, double precio) throws NoNegativoException, NoCeroException{
+        ArrayList<Producto> productos = traerDatos(ruta);
+        for (int i = 0; i < productos.size(); i++) {
+          if(productos.get(i).getNombre().equalsIgnoreCase(nombre)){
+                productos.get(i).setNombre(nombre);
+                productos.get(i).setTipo(tipo);
+                productos.get(i).setMarca(marca);
+                productos.get(i).setUnidades(Unidades);
+                productos.get(i).setGarantia(garantia);
+                productos.get(i).setGenero(genero);
+                productos.get(i).setClasificacion(clasficacion);
+                productos.get(i).setPrecio(precio);
+                i=productos.size();
+            }
+        }
+        return productos;
     }
 }
