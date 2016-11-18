@@ -168,17 +168,17 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_mnSalirActionPerformed
 
     private void mnNuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoProductoActionPerformed
-        NuevoProducto n = new NuevoProducto(this, true);
+        RegistrarProductos n = new RegistrarProductos(this, true);
         n.setVisible(true);
     }//GEN-LAST:event_mnNuevoProductoActionPerformed
 
     private void mnNuevoClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnNuevoClienteActionPerformed
-        RegistroCliente r = new RegistroCliente(this, true);
+        RegistrarClientes r = new RegistrarClientes(this, true);
         r.setVisible(true);
     }//GEN-LAST:event_mnNuevoClienteActionPerformed
 
     private void mnAgregarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAgregarCompraActionPerformed
-        Compra C = new Compra(this,true);
+        RegistrarCompra C = new RegistrarCompra(this,true);
         C.setVisible(true);
     }//GEN-LAST:event_mnAgregarCompraActionPerformed
 

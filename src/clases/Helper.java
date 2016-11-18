@@ -9,8 +9,8 @@ package clases;
 import excepciones.NoCeroException;
 import excepciones.NoNegativoException;
 import interfaz.ListadoClientes;
-import interfaz.NuevoProducto;
-import interfaz.RegistroCliente;
+import interfaz.RegistrarProductos;
+import interfaz.RegistrarClientes;
 import java.awt.Component;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -151,7 +151,7 @@ public class Helper {
         }
 
     }
-    
+
     public static void llenadoProductos(JTable tabla, ArrayList<Producto> productos) {
         int nf;
         DefaultTableModel tm;
@@ -170,7 +170,7 @@ public class Helper {
 
     }
 
-     public static void llenadoProductos(JTable tabla, String ruta) {
+    public static void llenadoProductos(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
         ArrayList<Producto> productos = traerDatos(ruta);
@@ -224,6 +224,41 @@ public class Helper {
 
     }
 
+    public static void llenadoTabla1(JTable tabla, String ruta) {
+        int nf;
+        DefaultTableModel tm;
+        ArrayList<Persona> persona = traerDatos(ruta);
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = persona.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(persona.get(i).getCedula(), i, 1);
+            tm.setValueAt(persona.get(i).getNombre(), i, 2);
+            tm.setValueAt(persona.get(i).getApellido(), i, 3);
+            tm.setValueAt(persona.get(i).getSexo(), i, 4);
+        }
+
+    }
+
+    public static void llenadoTabla1(JTable tabla, ArrayList<Persona> persona) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = persona.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(persona.get(i).getCedula(), i, 1);
+            tm.setValueAt(persona.get(i).getNombre(), i, 2);
+            tm.setValueAt(persona.get(i).getApellido(), i, 3);
+            tm.setValueAt(persona.get(i).getSexo(), i, 4);
+        }
+
+    }
+
     public static ArrayList traerDatos(String ruta) {
         FileInputStream archivo;
         ObjectInputStream entrada;
@@ -253,7 +288,7 @@ public class Helper {
             try {
                 salida.writeObject(productos.get(i));
             } catch (IOException ex) {
-                Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -264,7 +299,7 @@ public class Helper {
             try {
                 salida.writeObject(personas.get(i));
             } catch (IOException ex) {
-                Logger.getLogger(RegistroCliente.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(RegistrarClientes.class.getName()).log(Level.SEVERE, null, ex);
             }
 
         }
@@ -348,7 +383,7 @@ public class Helper {
         ArrayList<Producto> productosFiltro = new ArrayList();
 
         for (int i = 0; i < productos.size(); i++) {
-       
+
             if (productos.get(i).getTipo().equalsIgnoreCase(tipo)) {
                 productosFiltro.add(productos.get(i));
             }
@@ -393,83 +428,87 @@ public class Helper {
         llenadoProductos(tabla, productoFiltro);
     }
 
-     public static void llenadoTablaCompra(JTable tabla, String ruta){
-         int nf;
-        DefaultTableModel tm;
-        ArrayList<Venta> compras = traerDatos(ruta);
-        tm = (DefaultTableModel)tabla.getModel();
-        nf = compras.size();
-        tm.setRowCount(nf);
-        limpiarTabla(tabla);
-        for (int i = 0; i < nf; i++) {
-           tm.setValueAt(i+1, i, 0);
-           tm.setValueAt(compras.get(i).getCliente().getCedula(), i, 1);
-           tm.setValueAt(compras.get(i).getCliente().getNombre(), i, 2);
-           tm.setValueAt(compras.get(i).getCliente().getApellido(), i, 3);
-           tm.setValueAt(compras.get(i).getProducto().getNombre(), i, 4);
-           tm.setValueAt(compras.get(i).getProducto().getGarantia(), i, 5);
-           tm.setValueAt(compras.get(i).getUnidades(), i, 6);
-           tm.setValueAt(compras.get(i).getCosto(), i, 7);
-        }
-     }
-     public static void llenadoTablaCompra(JTable tabla, ArrayList<Venta>compras){
+    public static void llenadoTablaCompra(JTable tabla, String ruta) {
         int nf;
         DefaultTableModel tm;
-        tm = (DefaultTableModel)tabla.getModel();
+        ArrayList<Venta> compras = traerDatos(ruta);
+        tm = (DefaultTableModel) tabla.getModel();
         nf = compras.size();
         tm.setRowCount(nf);
         limpiarTabla(tabla);
         for (int i = 0; i < nf; i++) {
-           tm.setValueAt(i+1, i, 0);
-           tm.setValueAt(compras.get(i).getProducto().getNombre(), i, 1);
-           tm.setValueAt(compras.get(i).getProducto().getMarca(), i, 2);
-           tm.setValueAt(compras.get(i).getProducto().getGarantia(), i, 3);
-           tm.setValueAt(compras.get(i).getUnidades(), i, 4);
-           tm.setValueAt(compras.get(i).getProducto().getPrecio(), i, 5);
-           tm.setValueAt(compras.get(i).getCosto(), i, 6);
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(compras.get(i).getCliente().getCedula(), i, 1);
+            tm.setValueAt(compras.get(i).getCliente().getNombre(), i, 2);
+            tm.setValueAt(compras.get(i).getCliente().getApellido(), i, 3);
+            tm.setValueAt(compras.get(i).getProducto().getNombre(), i, 4);
+            tm.setValueAt(compras.get(i).getProducto().getGarantia(), i, 5);
+            tm.setValueAt(compras.get(i).getUnidades(), i, 6);
+            tm.setValueAt(compras.get(i).getCosto(), i, 7);
         }
-     }
-     
-     public static void llenarComboPersonas(JComboBox combo, String ruta){
+    }
+
+    public static void llenadoTablaCompra(JTable tabla, ArrayList<Venta> compras) {
+        int nf;
+        DefaultTableModel tm;
+        tm = (DefaultTableModel) tabla.getModel();
+        nf = compras.size();
+        tm.setRowCount(nf);
+        limpiarTabla(tabla);
+        for (int i = 0; i < nf; i++) {
+            tm.setValueAt(i + 1, i, 0);
+            tm.setValueAt(compras.get(i).getProducto().getNombre(), i, 1);
+            tm.setValueAt(compras.get(i).getProducto().getMarca(), i, 2);
+            tm.setValueAt(compras.get(i).getProducto().getGarantia(), i, 3);
+            tm.setValueAt(compras.get(i).getUnidades(), i, 4);
+            tm.setValueAt(compras.get(i).getProducto().getPrecio(), i, 5);
+            tm.setValueAt(compras.get(i).getCosto(), i, 6);
+        }
+    }
+
+    public static void llenarComboPersonas(JComboBox combo, String ruta) {
         ArrayList<Persona> personas = traerDatos(ruta);
         DefaultComboBoxModel dcbm = (DefaultComboBoxModel) combo.getModel();
         dcbm.removeAllElements();
         Persona p;
         for (int i = 0; i < personas.size(); i++) {
             p = personas.get(i);
-            dcbm.addElement(p.getCedula()+" - "+p.getNombre()+" "+p.getApellido());
+            dcbm.addElement(p.getCedula() + " - " + p.getNombre() + " " + p.getApellido());
         }
-     }
-        public static void llenarComboProductos(JComboBox combo, String ruta){
+    }
+
+    public static void llenarComboProductos(JComboBox combo, String ruta) {
         ArrayList<Producto> productos = traerDatos(ruta);
         DefaultComboBoxModel dcbm = (DefaultComboBoxModel) combo.getModel();
         dcbm.removeAllElements();
         Producto p;
         for (int i = 0; i < productos.size(); i++) {
             p = productos.get(i);
-            dcbm.addElement(p.getNombre()+" - "+p.getMarca()+" - "+p.getUnidades()+" - "+p.getGarantia()+" - "+p.getPrecio());
+            dcbm.addElement(p.getNombre() + " - " + p.getMarca() + " - " + p.getUnidades() + " - " + p.getGarantia() + " - " + p.getPrecio());
         }
-        }
-        public static Producto traerProducto(String Nombre,String ruta){
+    }
+
+    public static Producto traerProducto(String Nombre, String ruta) {
         ArrayList<Producto> productos = traerDatos(ruta);
         for (int i = 0; i < productos.size(); i++) {
-            if(productos.get(i).getNombre().equals(Nombre)){
+            if (productos.get(i).getNombre().equals(Nombre)) {
                 return productos.get(i);
             }
         }
         return null;
     }
-        public static Persona traerPersona(String cedula, String ruta){
+
+    public static Persona traerPersona(String cedula, String ruta) {
         ArrayList<Persona> personas = traerDatos(ruta);
         for (int i = 0; i < personas.size(); i++) {
-            if(personas.get(i).getCedula().equals(cedula)){
+            if (personas.get(i).getCedula().equals(cedula)) {
                 return personas.get(i);
             }
-            
+
         }
         return null;
     }
-       
+
     public static void Factura(JTable tabla, String ruta, String cedula) {
         ArrayList<Venta> compras = traerDatos(ruta);
         ArrayList<Venta> comprasFiltro = new ArrayList();
@@ -481,53 +520,58 @@ public class Helper {
 
         llenadoTablaCompra(tabla, comprasFiltro);
     }
-    public static ArrayList<Producto> actualizarUnidades(String ruta, String Nombre, int unidad) throws NoNegativoException, NoCeroException{
+
+    public static ArrayList<Producto> actualizarUnidades(String ruta, String Nombre, int unidad) throws NoNegativoException, NoCeroException {
         ArrayList<Producto> productos = traerDatos(ruta);
         for (int i = 0; i < productos.size(); i++) {
-          if(productos.get(i).getNombre().equals(Nombre)){
-               productos.get(i).setUnidades(productos.get(i).getUnidades() - unidad);
-               
-                i=productos.size();
+            if (productos.get(i).getNombre().equals(Nombre)) {
+                productos.get(i).setUnidades(productos.get(i).getUnidades() - unidad);
+
+                i = productos.size();
             }
         }
         return productos;
     }
-    public static boolean buscarPorCedula(String cedula, String ruta){
+
+    public static boolean buscarPorCedula(String cedula, String ruta) {
         ArrayList<Persona> personas = traerDatos(ruta);
         for (int i = 0; i < personas.size(); i++) {
-            if(personas.get(i).getCedula().equals(cedula)){
+            if (personas.get(i).getCedula().equals(cedula)) {
                 return true;
             }
-            
+
         }
         return false;
     }
-    public static boolean buscarPorNombreProducto(String Nombre, String ruta){
+
+    public static boolean buscarPorNombreProducto(String Nombre, String ruta) {
         ArrayList<Producto> productos = traerDatos(ruta);
         for (int i = 0; i < productos.size(); i++) {
-            if(productos.get(i).getNombre().equalsIgnoreCase(Nombre)){
+            if (productos.get(i).getNombre().equalsIgnoreCase(Nombre)) {
                 return true;
             }
-            
+
         }
         return false;
     }
-    public static ArrayList<Persona> actualizarPersona(String ruta, String cedula, String nombre, String apellido, String sexo){
+
+    public static ArrayList<Persona> actualizarPersona(String ruta, String cedula, String nombre, String apellido, String sexo) {
         ArrayList<Persona> personas = traerDatos(ruta);
         for (int i = 0; i < personas.size(); i++) {
-          if(personas.get(i).getCedula().equals(cedula)){
+            if (personas.get(i).getCedula().equals(cedula)) {
                 personas.get(i).setNombre(nombre);
                 personas.get(i).setApellido(apellido);
                 personas.get(i).setSexo(sexo);
-                i=personas.size();
+                i = personas.size();
             }
         }
         return personas;
     }
-    public static ArrayList<Producto> actualizarProducto(String ruta, String nombre, String tipo, String marca, int Unidades, String garantia, String genero, String clasficacion, double precio) throws NoNegativoException, NoCeroException{
+
+    public static ArrayList<Producto> actualizarProducto(String ruta, String nombre, String tipo, String marca, int Unidades, String garantia, String genero, String clasficacion, double precio) throws NoNegativoException, NoCeroException {
         ArrayList<Producto> productos = traerDatos(ruta);
         for (int i = 0; i < productos.size(); i++) {
-          if(productos.get(i).getNombre().equalsIgnoreCase(nombre)){
+            if (productos.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 productos.get(i).setNombre(nombre);
                 productos.get(i).setTipo(tipo);
                 productos.get(i).setMarca(marca);
@@ -536,7 +580,7 @@ public class Helper {
                 productos.get(i).setGenero(genero);
                 productos.get(i).setClasificacion(clasficacion);
                 productos.get(i).setPrecio(precio);
-                i=productos.size();
+                i = productos.size();
             }
         }
         return productos;

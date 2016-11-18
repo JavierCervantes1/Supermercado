@@ -62,7 +62,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
         tblProductos = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("LISTAR MERCANCIA");
+        setTitle("Listado Mercancia");
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -100,21 +100,21 @@ public class ListadoMercancia extends javax.swing.JDialog {
         jPanel6.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setText("Tipo");
-        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 20, 80, 30));
+        jPanel6.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 20, 80, 30));
 
         jLabel3.setText("Garantía");
-        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 90, 70, 40));
+        jPanel6.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 90, 70, 40));
 
         jLabel4.setText("Marca");
-        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 80, 30));
-        jPanel6.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 100, 150, -1));
+        jPanel6.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 50, 80, 40));
+        jPanel6.add(txtGarantia, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 100, 150, -1));
 
         txtTipo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtTipoKeyTyped(evt);
             }
         });
-        jPanel6.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 20, 150, -1));
+        jPanel6.add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 20, 150, -1));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Género"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -149,7 +149,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
                 txtMarcaKeyTyped(evt);
             }
         });
-        jPanel6.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 60, 150, -1));
+        jPanel6.add(txtMarca, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 60, 150, -1));
 
         jPanel1.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 570, 220));
 
@@ -171,17 +171,17 @@ public class ListadoMercancia extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblProductos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 740, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 740, 190));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 740, 460));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 760, 470));
 
-        setSize(new java.awt.Dimension(756, 495));
+        setSize(new java.awt.Dimension(774, 508));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdListarActionPerformed
         if (txtTipo.getText().trim().isEmpty() && txtMarca.getText().trim().isEmpty() && txtGarantia.getText().trim().isEmpty() && !RbUnisex.isSelected() && !RbMasculino.isSelected() && !RbFemenino.isSelected() && !CheckConsumo.isSelected() && !CheckNegocio.isSelected()) {
-            Helper.mensaje(this, "Por Favor utilice una forma de búsqueda", "Error", 2);
+            Helper.mensaje(this, "Por Favor Utilice Una Forma De Búsqueda", "Error", 2);
             JButton botonesH[] = {cmdListar};
             JButton botonesD[] = {cmdLimpiar, cmdSalir};
             Helper.habilitarBotones(botonesH);
@@ -195,7 +195,7 @@ public class ListadoMercancia extends javax.swing.JDialog {
 
             genero = Helper.getGenero(genero, RbUnisex, RbMasculino, RbFemenino);
             clasificacion = Helper.getClasificacion(clasificacion, CheckConsumo, CheckNegocio);
-            
+
             Helper.mercancia(tblProductos, ruta, tipo, marca, garantia, genero, clasificacion);
 
             txtMarca.setText("");

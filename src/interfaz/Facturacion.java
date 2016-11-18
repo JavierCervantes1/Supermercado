@@ -45,13 +45,14 @@ public class Facturacion extends javax.swing.JDialog {
         tblCompra1 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        cmbClientes1 = new javax.swing.JComboBox<String>();
+        cmbClientes1 = new javax.swing.JComboBox<>();
         jPanel3 = new javax.swing.JPanel();
         cmdFacturar = new javax.swing.JButton();
         cmdSalir = new javax.swing.JButton();
         cmbReiniciar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Facturación");
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -73,7 +74,7 @@ public class Facturacion extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(tblCompra1);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 180, 710, 150));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 180, 710, 150));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificacion Cliente"));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -83,7 +84,7 @@ public class Facturacion extends javax.swing.JDialog {
 
         jPanel2.add(cmbClientes1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 50, 350, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 420, 120));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 30, 420, 120));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -102,7 +103,7 @@ public class Facturacion extends javax.swing.JDialog {
                 cmdSalirActionPerformed(evt);
             }
         });
-        jPanel3.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, -1));
+        jPanel3.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, -1));
 
         cmbReiniciar.setText("Reiniciar");
         cmbReiniciar.addActionListener(new java.awt.event.ActionListener() {
@@ -110,24 +111,23 @@ public class Facturacion extends javax.swing.JDialog {
                 cmbReiniciarActionPerformed(evt);
             }
         });
-        jPanel3.add(cmbReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 120, -1));
+        jPanel3.add(cmbReiniciar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 120, -1));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 190, 120));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 20, 190, 140));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 709, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 728, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 332, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 344, Short.MAX_VALUE)
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdFacturarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdFacturarActionPerformed
