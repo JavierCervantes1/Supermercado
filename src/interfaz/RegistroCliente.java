@@ -13,6 +13,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
 /**
@@ -25,6 +26,7 @@ public class RegistroCliente extends javax.swing.JDialog {
     ObjectOutputStream salida;
     ArrayList<Persona> personas;
     Persona c;
+    int botones = 0;
 
     /**
      * Creates new form RegistroCliente
@@ -43,6 +45,10 @@ public class RegistroCliente extends javax.swing.JDialog {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+        JButton botonesH[] = {cmdGuardar, cmdSalir, cmdCancelar};
+        JButton botonesD[] = {cmdModificar, cmdEliminar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
     }
 
     /**
@@ -63,14 +69,15 @@ public class RegistroCliente extends javax.swing.JDialog {
         txtNombre = new javax.swing.JTextField();
         txtApellido = new javax.swing.JTextField();
         txtCedula = new javax.swing.JTextField();
-        cmbSexo = new javax.swing.JComboBox<>();
+        cmbSexo = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblPersonas = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
-        cmdLimpiar = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
         cmdSalir = new javax.swing.JButton();
+        cmdModificar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("CLIENTES");
@@ -114,7 +121,7 @@ public class RegistroCliente extends javax.swing.JDialog {
         });
         jPanel3.add(txtCedula, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 170, -1));
 
-        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", "Sin definir" }));
+        cmbSexo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Masculino", "Femenino", "Sin definir" }));
         jPanel3.add(cmbSexo, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 120, 170, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 310, 180));
@@ -161,15 +168,15 @@ public class RegistroCliente extends javax.swing.JDialog {
                 cmdEliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 120, -1));
+        jPanel2.add(cmdEliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 120, -1));
 
-        cmdLimpiar.setText("Limpiar");
-        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        cmdCancelar.setText("Cancelar");
+        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdLimpiarActionPerformed(evt);
+                cmdCancelarActionPerformed(evt);
             }
         });
-        jPanel2.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 120, -1));
+        jPanel2.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 120, -1));
 
         cmdSalir.setText("Salir");
         cmdSalir.addActionListener(new java.awt.event.ActionListener() {
@@ -178,6 +185,14 @@ public class RegistroCliente extends javax.swing.JDialog {
             }
         });
         jPanel2.add(cmdSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 140, 120, -1));
+
+        cmdModificar.setText("Modificar");
+        cmdModificar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdModificarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cmdModificar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, 120, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 30, 180, 180));
 
@@ -204,14 +219,26 @@ public class RegistroCliente extends javax.swing.JDialog {
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
         if (txtCedula.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Por Favor Digite La Cedula Del Cliente", "Error", 1);
+            Helper.mensaje(this, "Por Favor Digite La Cedula Del Cliente", "Error", 2);
             txtCedula.requestFocusInWindow();
+            botones = 1;
         } else if (txtNombre.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Por Favor Digite El Nombre Del Cliente", "Error", 1);
+            Helper.mensaje(this, "Por Favor Digite El Nombre Del Cliente", "Error", 2);
             txtNombre.requestFocusInWindow();
+            botones = 1;
         } else if (txtApellido.getText().trim().isEmpty()) {
-            Helper.mensaje(this, "Por Favor Digite El Apellido Del Cliente", "Error", 1);
+            Helper.mensaje(this, "Por Favor Digite El Apellido Del Cliente", "Error", 2);
             txtApellido.requestFocusInWindow();
+            botones = 1;
+        } else if (Helper.buscarPorCedula(txtCedula.getText(), ruta)) {
+            Helper.mensaje(this, "Este Cliente Ya Existe, Por Favor Modifique sus datos", "Error", 2);
+            txtNombre.requestFocusInWindow();
+            txtCedula.setEnabled(false);
+            JButton botonesH[] = {cmdModificar, cmdSalir, cmdCancelar};
+            JButton botonesD[] = {cmdGuardar, cmdEliminar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            botones = 0;
         } else {
             try {
                 String Cedula, Nombre, Apellido, Sexo;
@@ -228,6 +255,12 @@ public class RegistroCliente extends javax.swing.JDialog {
             } catch (IOException ex) {
                 Logger.getLogger(ex.getMessage());
             }
+        }
+        if (botones == 1) {
+            JButton botonesH[] = {cmdGuardar, cmdSalir, cmdCancelar};
+            JButton botonesD[] = {cmdModificar, cmdEliminar};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
         }
     }//GEN-LAST:event_cmdGuardarActionPerformed
 
@@ -272,12 +305,17 @@ public class RegistroCliente extends javax.swing.JDialog {
 
     }//GEN-LAST:event_cmdEliminarActionPerformed
 
-    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
         txtCedula.setText("");
+        txtCedula.setEnabled(true);
         txtNombre.setText("");
         txtApellido.setText("");
-        cmbSexo.requestFocusInWindow();
-    }//GEN-LAST:event_cmdLimpiarActionPerformed
+        cmbSexo.setSelectedIndex(0);
+         JButton botonesH[] = {cmdGuardar, cmdSalir, cmdCancelar};
+        JButton botonesD[] = {cmdModificar, cmdEliminar};
+        Helper.habilitarBotones(botonesH);
+        Helper.deshabilitarBotones(botonesD);
+    }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void txtNombreKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNombreKeyTyped
         char c = evt.getKeyChar();
@@ -302,6 +340,39 @@ public class RegistroCliente extends javax.swing.JDialog {
             evt.consume();
         }
     }//GEN-LAST:event_txtCedulaKeyTyped
+
+    private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
+        if (txtCedula.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite La Cedula Del Cliente", "Error", 1);
+            txtCedula.requestFocusInWindow();
+        } else if (txtNombre.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Nombre Del Cliente", "Error", 1);
+            txtNombre.requestFocusInWindow();
+        } else if (txtApellido.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite El Apellido Del Cliente", "Error", 1);
+            txtApellido.requestFocusInWindow();
+        } else {
+            try {
+                String cedula, nombre, apellido, sexo;
+                ArrayList<Persona> personasActualizado;
+
+                cedula = txtCedula.getText();
+                nombre = txtNombre.getText();
+                apellido = txtApellido.getText();
+                sexo = (String) cmbSexo.getSelectedItem();
+
+                personasActualizado = Helper.actualizarPersona(ruta, cedula, nombre, apellido, sexo);
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                Helper.volcado(salida, personasActualizado);
+                Helper.llenadoTablaClientes(tblPersonas, ruta);
+                Helper.mensaje(this, "Datos modificados exitosamente", "Información", 1);
+
+                
+            } catch (IOException ex) {
+                Logger.getLogger(RegistroCliente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }//GEN-LAST:event_cmdModificarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -355,9 +426,10 @@ public class RegistroCliente extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> cmbSexo;
+    private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdGuardar;
-    private javax.swing.JButton cmdLimpiar;
+    private javax.swing.JButton cmdModificar;
     private javax.swing.JButton cmdSalir;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

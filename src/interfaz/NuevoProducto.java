@@ -45,7 +45,7 @@ public class NuevoProducto extends javax.swing.JDialog {
             System.out.println(ex.getMessage());
         }
 
-        JButton botonesH[] = {cmdGuardar, cmdSalir, cmdLimpiar};
+        JButton botonesH[] = {cmdGuardar, cmdSalir, cmdCancelar};
         JButton botonesD[] = {cmdEliminar, cmdModificar};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
@@ -82,7 +82,7 @@ public class NuevoProducto extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblProductos = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
-        cmdLimpiar = new javax.swing.JButton();
+        cmdCancelar = new javax.swing.JButton();
         cmdGuardar = new javax.swing.JButton();
         cmdEliminar = new javax.swing.JButton();
         cmdSalir = new javax.swing.JButton();
@@ -187,13 +187,13 @@ public class NuevoProducto extends javax.swing.JDialog {
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Opciones"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmdLimpiar.setText("Limpiar");
-        cmdLimpiar.addActionListener(new java.awt.event.ActionListener() {
+        cmdCancelar.setText("Cancelar");
+        cmdCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdLimpiarActionPerformed(evt);
+                cmdCancelarActionPerformed(evt);
             }
         });
-        jPanel4.add(cmdLimpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 80, -1));
+        jPanel4.add(cmdCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 30, 80, -1));
 
         cmdGuardar.setText("Guardar");
         cmdGuardar.addActionListener(new java.awt.event.ActionListener() {
@@ -275,14 +275,14 @@ public class NuevoProducto extends javax.swing.JDialog {
         Helper.radioButtons(genero, ruta, tblProductos, RbUnisex, RbMasculino, RbFemenino);
         Helper.checkBoxes(clasificacion, ruta, tblProductos, CheckConsumo, CheckNegocio);
 
-        JButton botonesH[] = {cmdGuardar, cmdSalir, cmdEliminar, cmdLimpiar};
+        JButton botonesH[] = {cmdGuardar, cmdSalir, cmdEliminar, cmdCancelar};
         JButton botonesD[] = {};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
 
     }//GEN-LAST:event_tblProductosMouseClicked
 
-    private void cmdLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLimpiarActionPerformed
+    private void cmdCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCancelarActionPerformed
         txtNombreProducto.setText("");
         txtPrecio.setText("");
         cmbMarca.setSelectedIndex(0);
@@ -293,51 +293,51 @@ public class NuevoProducto extends javax.swing.JDialog {
         CheckConsumo.setSelected(false);
         CheckNegocio.setSelected(false);
         txtNombreProducto.requestFocusInWindow();
-        JButton botonesH[] = {cmdGuardar, cmdLimpiar, cmdSalir};
+        JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdSalir};
         JButton botonesD[] = {cmdEliminar};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
-    }//GEN-LAST:event_cmdLimpiarActionPerformed
+    }//GEN-LAST:event_cmdCancelarActionPerformed
 
     private void cmdGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdGuardarActionPerformed
         if (txtNombreProducto.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite El Nombre del Producto", "Error", 2);
             JButton botonesH[] = {cmdGuardar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtNombreProducto.requestFocusInWindow();
         } else if (txtUnidades.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite Las Unidades del Producto", "Error", 2);
             JButton botonesH[] = {cmdGuardar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtUnidades.requestFocusInWindow();
         } else if (txtPrecio.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite El Precio del Producto", "Error", 2);
             JButton botonesH[] = {cmdGuardar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtPrecio.requestFocusInWindow();
         } else if (!RbUnisex.isSelected() && !RbMasculino.isSelected() && !RbFemenino.isSelected()) {
             Helper.mensaje(this, "Por Favor Seleccione el Género del Producto", "Error", 2);
             JButton botonesH[] = {cmdGuardar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             RbUnisex.requestFocusInWindow();
         } else if (!CheckNegocio.isSelected() && !CheckConsumo.isSelected()) {
             Helper.mensaje(this, "Por Favor Seleccione la Clasficación del Producto", "Error", 2);
             JButton botonesH[] = {cmdGuardar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             CheckConsumo.requestFocusInWindow();
         } else if (Helper.buscarPorNombreProducto(txtNombreProducto.getText(), ruta)) {
             Helper.mensaje(this, "Este Producto Ya Existe, Por Favor modifiquelo", "Error", 2);
-            JButton botonesH[] = {cmdGuardar, cmdSalir, cmdLimpiar, cmdModificar};
+            JButton botonesH[] = {cmdGuardar, cmdSalir, cmdCancelar, cmdModificar};
             JButton botonesD[] = {cmdEliminar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
@@ -371,7 +371,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
                 txtUnidades.requestFocusInWindow();
             }
-            JButton botonesH[] = {cmdLimpiar, cmdSalir};
+            JButton botonesH[] = {cmdCancelar, cmdSalir};
             JButton botonesD[] = {cmdEliminar, cmdGuardar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
@@ -401,7 +401,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                 CheckConsumo.setSelected(false);
                 CheckNegocio.setSelected(false);
                 txtNombreProducto.requestFocusInWindow();
-                JButton botonesH[] = {cmdGuardar, cmdLimpiar, cmdSalir};
+                JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdSalir};
                 JButton botonesD[] = {cmdEliminar};
                 Helper.habilitarBotones(botonesH);
                 Helper.deshabilitarBotones(botonesD);
@@ -411,7 +411,7 @@ public class NuevoProducto extends javax.swing.JDialog {
                 Logger.getLogger(NuevoProducto.class.getName()).log(Level.SEVERE, null, ex);
             }
         } else {
-            JButton botonesH[] = {cmdGuardar, cmdLimpiar, cmdEliminar, cmdSalir};
+            JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdEliminar, cmdSalir};
             JButton botonesD[] = {};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
@@ -442,35 +442,35 @@ public class NuevoProducto extends javax.swing.JDialog {
              if (txtNombreProducto.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite El Nombre del Producto", "Error", 2);
             JButton botonesH[] = {cmdModificar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtNombreProducto.requestFocusInWindow();
         } else if (txtUnidades.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite Las Unidades del Producto", "Error", 2);
             JButton botonesH[] = {cmdModificar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtUnidades.requestFocusInWindow();
         } else if (txtPrecio.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite El Precio del Producto", "Error", 2);
             JButton botonesH[] = {cmdModificar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             txtPrecio.requestFocusInWindow();
         } else if (!RbUnisex.isSelected() && !RbMasculino.isSelected() && !RbFemenino.isSelected()) {
             Helper.mensaje(this, "Por Favor Seleccione el Género del Producto", "Error", 2);
             JButton botonesH[] = {cmdModificar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdLimpiar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             RbUnisex.requestFocusInWindow();
         } else if (!CheckNegocio.isSelected() && !CheckConsumo.isSelected()) {
             Helper.mensaje(this, "Por Favor Seleccione la Clasficación del Producto", "Error", 2);
             JButton botonesH[] = {cmdModificar, cmdSalir};
-            JButton botonesD[] = {cmdGuardar, cmdEliminar, cmdLimpiar};
+            JButton botonesD[] = {cmdGuardar, cmdEliminar, cmdCancelar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
             CheckConsumo.requestFocusInWindow();
@@ -562,9 +562,9 @@ public class NuevoProducto extends javax.swing.JDialog {
     private javax.swing.JComboBox<String> cmbGarantia;
     private javax.swing.JComboBox<String> cmbMarca;
     private javax.swing.JComboBox<String> cmbTipo;
+    private javax.swing.JButton cmdCancelar;
     private javax.swing.JButton cmdEliminar;
     private javax.swing.JButton cmdGuardar;
-    private javax.swing.JButton cmdLimpiar;
     private javax.swing.JButton cmdModificar;
     private javax.swing.JButton cmdSalir;
     private javax.swing.JLabel jLabel1;
