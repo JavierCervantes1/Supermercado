@@ -274,7 +274,7 @@ public class RegistrarProductos extends javax.swing.JDialog {
         Helper.checkBoxes(clasificacion, ruta, tblProductos, CheckConsumo, CheckNegocio);
 
         JButton botonesH[] = {cmdGuardar, cmdSalir, cmdEliminar, cmdCancelar};
-        JButton botonesD[] = {};
+        JButton botonesD[] = {cmdModificar};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
 
@@ -292,7 +292,7 @@ public class RegistrarProductos extends javax.swing.JDialog {
         CheckNegocio.setSelected(false);
         txtNombreProducto.requestFocusInWindow();
         JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdSalir};
-        JButton botonesD[] = {cmdEliminar};
+        JButton botonesD[] = {cmdEliminar, cmdModificar};
         Helper.habilitarBotones(botonesH);
         Helper.deshabilitarBotones(botonesD);
     }//GEN-LAST:event_cmdCancelarActionPerformed
@@ -370,7 +370,7 @@ public class RegistrarProductos extends javax.swing.JDialog {
                 txtUnidades.requestFocusInWindow();
             }
             JButton botonesH[] = {cmdCancelar, cmdSalir};
-            JButton botonesD[] = {cmdEliminar, cmdGuardar};
+            JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdModificar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
         }
@@ -400,7 +400,7 @@ public class RegistrarProductos extends javax.swing.JDialog {
                 CheckNegocio.setSelected(false);
                 txtNombreProducto.requestFocusInWindow();
                 JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdSalir};
-                JButton botonesD[] = {cmdEliminar};
+                JButton botonesD[] = {cmdEliminar, cmdModificar};
                 Helper.habilitarBotones(botonesH);
                 Helper.deshabilitarBotones(botonesD);
             } catch (FileNotFoundException ex) {
@@ -410,7 +410,7 @@ public class RegistrarProductos extends javax.swing.JDialog {
             }
         } else {
             JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdEliminar, cmdSalir};
-            JButton botonesD[] = {};
+            JButton botonesD[] = {cmdModificar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
         }
@@ -437,7 +437,7 @@ public class RegistrarProductos extends javax.swing.JDialog {
     }//GEN-LAST:event_txtPrecioKeyTyped
 
     private void cmdModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdModificarActionPerformed
-             if (txtNombreProducto.getText().trim().isEmpty()) {
+        if (txtNombreProducto.getText().trim().isEmpty()) {
             Helper.mensaje(this, "Por Favor Digite El Nombre del Producto", "Error", 2);
             JButton botonesH[] = {cmdModificar, cmdSalir};
             JButton botonesD[] = {cmdEliminar, cmdGuardar, cmdCancelar};
@@ -473,34 +473,50 @@ public class RegistrarProductos extends javax.swing.JDialog {
             Helper.deshabilitarBotones(botonesD);
             CheckConsumo.requestFocusInWindow();
         } else {
-        try {
-            ArrayList<Producto> productosActualizado;
-            String Nombre, Tipo, Marca, Garantia, Genero = "", Clasificacion = "";
-            double Precio;
-            int Unidades;
+            try {
+                ArrayList<Producto> productosActualizado;
+                String Nombre, Tipo, Marca, Garantia, Genero = "", Clasificacion = "";
+                double Precio;
+                int Unidades;
 
-            Nombre = txtNombreProducto.getText();
-            Marca = (String) cmbMarca.getSelectedItem();
-            Garantia = (String) cmbGarantia.getSelectedItem();
-            Tipo = (String) cmbTipo.getSelectedItem();
-            Unidades = Integer.parseInt(txtUnidades.getText());
-            Precio = Double.parseDouble(txtPrecio.getText());
+                Nombre = txtNombreProducto.getText();
+                Marca = (String) cmbMarca.getSelectedItem();
+                Garantia = (String) cmbGarantia.getSelectedItem();
+                Tipo = (String) cmbTipo.getSelectedItem();
+                Unidades = Integer.parseInt(txtUnidades.getText());
+                Precio = Double.parseDouble(txtPrecio.getText());
 
-            Genero = Helper.getGenero(Genero, RbUnisex, RbMasculino, RbFemenino);
-            Clasificacion = Helper.getClasificacion(Clasificacion, CheckConsumo, CheckNegocio);
+                Genero = Helper.getGenero(Genero, RbUnisex, RbMasculino, RbFemenino);
+                Clasificacion = Helper.getClasificacion(Clasificacion, CheckConsumo, CheckNegocio);
 
-            productosActualizado = Helper.actualizarProducto(ruta, Nombre, Tipo, Marca, Unidades, Garantia, Genero, Clasificacion, Precio);
+                productosActualizado = Helper.actualizarProducto(ruta, Nombre, Tipo, Marca, Unidades, Garantia, Genero, Clasificacion, Precio);
 
-            salida = new ObjectOutputStream(new FileOutputStream(ruta));
-            Helper.volcado(salida, productosActualizado);
-            Helper.llenadoTabla(tblProductos, ruta);
-        } catch (IOException ex) {
-            Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoNegativoException ex) {
-            Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NoCeroException ex) {
-            Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
-        }
+                salida = new ObjectOutputStream(new FileOutputStream(ruta));
+                Helper.volcado(salida, productosActualizado);
+                Helper.llenadoTabla(tblProductos, ruta);
+                txtNombreProducto.setText("");
+                txtPrecio.setText("");
+                cmbMarca.setSelectedIndex(0);
+                cmbGarantia.setSelectedIndex(0);
+                txtUnidades.setText("");
+                cmbTipo.setSelectedIndex(0);
+                GRbGenero.clearSelection();
+                CheckConsumo.setSelected(false);
+                CheckNegocio.setSelected(false);
+                txtNombreProducto.setEnabled(true);
+                txtNombreProducto.requestFocusInWindow();
+                JButton botonesH[] = {cmdGuardar, cmdCancelar, cmdSalir};
+                JButton botonesD[] = {cmdEliminar, cmdModificar};
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+
+            } catch (IOException ex) {
+                Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoNegativoException ex) {
+                Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (NoCeroException ex) {
+                Logger.getLogger(RegistrarProductos.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
 
     }//GEN-LAST:event_cmdModificarActionPerformed

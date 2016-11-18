@@ -279,32 +279,60 @@ public class RegistrarCompra extends javax.swing.JDialog {
     private void cmdCalcularCostoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdCalcularCostoActionPerformed
         int Unidades;
 
-        Unidades = Integer.parseInt(txtUnidades.getText());
-        if (Unidades < 0) {
-            try {
-                throw new NoNegativoException("El Número De Unidades No Debe Ser Negativo");
-            } catch (NoNegativoException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
-            sw = 1;
-        }
-        if (Unidades == 0) {
-            try {
-                throw new NoCeroException("El Número De Unidades No Debe Ser Cero");
-            } catch (NoCeroException ex) {
-                JOptionPane.showMessageDialog(this, ex.getMessage());
-            }
-            sw = 1;
-        }
-
-        if (sw == 0) {
-            txtCosto.setText(String.valueOf(Unidades * c.getPrecio()));
-
-            JButton botonesH[] = {cmdRegistroCompra, cmdReiniciar, cmdSalir};
-            JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdCalcularCosto};
-            txtUnidades.setEditable(false);
+        if (tblProductos1.getRowCount() == 0) {
+            Helper.mensaje(this, "Aun no ha ingresado el Producto", "Error", 2);
+            JButton botonesH[] = {cmdBuscarProducto, cmdSalir};
+            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdReiniciar};
             Helper.habilitarBotones(botonesH);
             Helper.deshabilitarBotones(botonesD);
+            txtNombreProducto.setEnabled(true);
+            txtNombreProducto.requestFocusInWindow();
+            txtNombreProducto.selectAll();
+
+        } else if (txtUnidades.getText().trim().isEmpty()) {
+            Helper.mensaje(this, "Por Favor Digite Las Unidades a Comprar", "Error", 2);
+            JButton botonesH[] = {cmdReiniciar, cmdSalir};
+            JButton botonesD[] = {cmdBuscarCliente, cmdCalcularCosto, cmdRegistroCompra, cmdReiniciar, cmdBuscarProducto};
+            Helper.habilitarBotones(botonesH);
+            Helper.deshabilitarBotones(botonesD);
+            txtUnidades.requestFocusInWindow();
+            sw = 1;
+        } else if (Integer.parseInt(txtUnidades.getText()) > c.getUnidades()) {
+            JOptionPane.showMessageDialog(this, "Debe ingrensar un numero de unidades menor o igual al Total Existente", "Error", 2);
+            txtUnidades.requestFocusInWindow();
+            txtUnidades.selectAll();
+            sw = 1;
+
+        } else {
+
+            Unidades = Integer.parseInt(txtUnidades.getText());
+            if (Unidades < 0) {
+                try {
+                    throw new NoNegativoException("El Número De Unidades No Debe Ser Negativo");
+                } catch (NoNegativoException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                sw = 1;
+            }
+            if (Unidades == 0) {
+                try {
+                    throw new NoCeroException("El Número De Unidades No Debe Ser Cero");
+                } catch (NoCeroException ex) {
+                    JOptionPane.showMessageDialog(this, ex.getMessage());
+                }
+                sw = 1;
+            }
+
+            if (sw == 0) {
+                Unidades = Integer.parseInt(txtUnidades.getText());
+                txtCosto.setText(String.valueOf(Unidades * c.getPrecio()));
+
+                JButton botonesH[] = {cmdRegistroCompra, cmdReiniciar, cmdSalir};
+                JButton botonesD[] = {cmdBuscarCliente, cmdBuscarProducto, cmdCalcularCosto};
+                txtUnidades.setEditable(false);
+                Helper.habilitarBotones(botonesH);
+                Helper.deshabilitarBotones(botonesD);
+            }
         }
         if (sw == 1) {
             JButton botonesH[] = {cmdCalcularCosto, cmdReiniciar, cmdSalir};
@@ -313,6 +341,7 @@ public class RegistrarCompra extends javax.swing.JDialog {
             Helper.deshabilitarBotones(botonesD);
             txtUnidades.requestFocusInWindow();
         }
+
     }//GEN-LAST:event_cmdCalcularCostoActionPerformed
 
     private void cmdRegistroCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdRegistroCompraActionPerformed
@@ -369,6 +398,7 @@ public class RegistrarCompra extends javax.swing.JDialog {
         txtNombreProducto.setText("");
         txtUnidades.setText("");
         txtCosto.setText("");
+        Helper.limpiarTabla(tblProductos1);
         JButton botonesH[] = {cmdBuscarCliente, cmdSalir};
         JButton botonesD[] = {cmdBuscarProducto, cmdCalcularCosto, cmdRegistroCompra, cmdReiniciar};
         Helper.habilitarBotones(botonesH);

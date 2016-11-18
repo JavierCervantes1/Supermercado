@@ -420,7 +420,7 @@ public class Helper {
         ArrayList<Producto> productos = traerDatos(ruta);
         ArrayList<Producto> productoFiltro = new ArrayList();
         for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getNombre().equals(nombre)) {
+            if (productos.get(i).getNombre().equalsIgnoreCase(nombre)) {
                 productoFiltro.add(productos.get(i));
             }
         }
@@ -491,7 +491,7 @@ public class Helper {
     public static Producto traerProducto(String Nombre, String ruta) {
         ArrayList<Producto> productos = traerDatos(ruta);
         for (int i = 0; i < productos.size(); i++) {
-            if (productos.get(i).getNombre().equals(Nombre)) {
+            if (productos.get(i).getNombre().equalsIgnoreCase(Nombre)) {
                 return productos.get(i);
             }
         }
